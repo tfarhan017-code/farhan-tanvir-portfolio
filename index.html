@@ -17,10 +17,107 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  font-family:"DM Sans",sans-serif;background:#30312f;color:var(--text);
+  font-family:"DM Sans",sans-serif;
+  color:var(--text);
   overflow-x:hidden;
+  position:relative;
+  background:#0b0d12;
 }
-a{color:inherit;text-decoration:none}
+
+/* ===== FULL-PAGE ELEGANT BUBBLE BACKGROUND ===== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-10;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 18% 18%,rgba(0,180,255,.16),transparent 25%),
+    radial-gradient(circle at 82% 22%,rgba(118,72,255,.14),transparent 26%),
+    radial-gradient(circle at 72% 78%,rgba(0,225,255,.12),transparent 28%),
+    radial-gradient(circle at 20% 82%,rgba(255,70,170,.10),transparent 25%);
+}
+
+/* soft glass bubbles */
+.bubble{
+  position:fixed;
+  z-index:-6;
+  pointer-events:none;
+  border-radius:50%;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.28);
+  background:
+    radial-gradient(circle at 30% 25%,rgba(255,255,255,.34),transparent 10%),
+    radial-gradient(circle at 68% 72%,rgba(0,210,255,.16),transparent 42%),
+    radial-gradient(circle at 35% 65%,rgba(145,80,255,.13),transparent 50%),
+    rgba(255,255,255,.025);
+  box-shadow:
+    inset 10px 10px 24px rgba(255,255,255,.10),
+    inset -12px -14px 28px rgba(0,0,0,.16),
+    0 0 28px rgba(0,190,255,.08);
+  backdrop-filter:blur(2px);
+}
+.bubble::before{
+  content:"";
+  position:absolute;
+  width:28%;
+  height:28%;
+  left:16%;
+  top:13%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.62),rgba(255,255,255,0) 70%);
+  filter:blur(2px);
+}
+.bubble::after{
+  content:"";
+  position:absolute;
+  inset:8%;
+  border-radius:50%;
+  border:1px solid rgba(0,220,255,.16);
+}
+.b1{width:150px;height:150px;left:2%;top:12%;animation:floatBubble1 18s ease-in-out infinite}
+.b2{width:90px;height:90px;right:9%;top:18%;animation:floatBubble2 14s ease-in-out infinite}
+.b3{width:210px;height:210px;right:-35px;top:39%;animation:floatBubble3 21s ease-in-out infinite}
+.b4{width:115px;height:115px;left:7%;top:57%;animation:floatBubble4 16s ease-in-out infinite}
+.b5{width:175px;height:175px;right:15%;bottom:7%;animation:floatBubble5 20s ease-in-out infinite}
+.b6{width:65px;height:65px;left:35%;top:8%;animation:floatBubble6 12s ease-in-out infinite}
+.b7{width:125px;height:125px;left:43%;bottom:2%;animation:floatBubble7 17s ease-in-out infinite}
+.b8{width:55px;height:55px;right:30%;top:52%;animation:floatBubble8 11s ease-in-out infinite}
+
+@keyframes floatBubble1{50%{transform:translate(55px,75px) scale(1.08)}100%{transform:translate(-15px,-20px) scale(.96)}}
+@keyframes floatBubble2{50%{transform:translate(-70px,45px) scale(.9)}100%{transform:translate(20px,-35px) scale(1.08)}}
+@keyframes floatBubble3{50%{transform:translate(-80px,-65px) scale(1.05)}100%{transform:translate(-20px,35px) scale(.94)}}
+@keyframes floatBubble4{50%{transform:translate(65px,-55px) scale(1.12)}100%{transform:translate(-10px,30px) scale(.96)}}
+@keyframes floatBubble5{50%{transform:translate(-90px,-60px) scale(.9)}100%{transform:translate(15px,25px) scale(1.08)}}
+@keyframes floatBubble6{50%{transform:translate(55px,80px) scale(1.2)}100%{transform:translate(-45px,-30px) scale(.9)}}
+@keyframes floatBubble7{50%{transform:translate(-75px,-75px) scale(1.08)}100%{transform:translate(50px,15px) scale(.94)}}
+@keyframes floatBubble8{50%{transform:translate(-50px,65px) scale(1.25)}100%{transform:translate(35px,-30px) scale(.9)}}
+
+/* translucent page surfaces let the bubble field remain visible */
+.page{width:100%;margin:0;background:transparent;overflow:hidden}
+section{padding:100px 70px;background:rgba(18,21,28,.34);backdrop-filter:blur(4px)}
+.skills-section{background:rgba(12,17,25,.28)}
+.contact{background:rgba(12,16,23,.38);backdrop-filter:blur(6px)}
+.portfolio{
+  background:linear-gradient(135deg,rgba(7,13,23,.88),rgba(10,18,31,.76));
+  color:#fff;
+}
+.gallery-section{
+  background:linear-gradient(135deg,rgba(7,13,23,.88),rgba(11,17,30,.76));
+}
+.motion-glow{display:none!important}
+.color-ribbon{display:none!important}
+
+@media(max-width:900px){
+  .bubble{opacity:.72}
+  .b1{width:105px;height:105px}.b3{width:145px;height:145px}
+  .b5{width:120px;height:120px}.b7{width:90px;height:90px}
+  section{background:rgba(15,19,27,.38)}
+  .portfolio,.gallery-section{background:rgba(7,13,23,.84)}
+}
+@media(prefers-reduced-motion:reduce){
+  .bubble{animation:none!important}
+}
 @media (min-width:901px){
   body{cursor:none}
   a,button,.project,.skill,.service,.gallery-item,.hero-portrait{cursor:none!important}
@@ -29,32 +126,59 @@ a{color:inherit;text-decoration:none}
 /* ===== CUSTOM CURSOR ===== */
 .cursor-dot,.cursor-ring{position:fixed;pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
 .cursor-dot{
-  width:8px;height:8px;border-radius:50%;background:var(--cyan);
-  box-shadow:0 0 10px var(--cyan),0 0 20px var(--cyan);
+  width:8px;height:8px;border-radius:50%;background:#c88a4a;
+  box-shadow:0 0 10px #c88a4a,0 0 20px rgba(200,138,74,.55);
   transition:.2s;
 }
 .cursor-ring{
-  width:36px;height:36px;border:2px solid var(--cyan);border-radius:50%;
-  z-index:99998;box-shadow:0 0 15px rgba(0,243,255,.4);
+  width:36px;height:36px;border:2px solid #c88a4a;border-radius:50%;
+  z-index:99998;box-shadow:0 0 15px rgba(200,138,74,.32);
   transition:width .2s,height .2s,border-color .2s;
 }
 #particle-canvas{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:99997}
 
 /* ===== PAGE ===== */
-.page{width:100%;margin:0;background:var(--bg);overflow:hidden}
+.page{width:100%;margin:0;background:rgba(232,227,220,.62);overflow:hidden;backdrop-filter:blur(2px)}
 
 /* ===== NAV ===== */
 nav{
   height:76px;padding:0 70px;display:flex;align-items:center;
   justify-content:space-between;border-bottom:1px solid var(--line);
 }
-.logo{font-family:"Manrope";font-size:22px;font-weight:800;letter-spacing:-1px}
-.links{display:flex;gap:28px;font-size:14px;font-weight:500}
-.links a{transition:.3s}.links a:hover{opacity:.5}
-.start{font-size:14px;font-weight:700;border-bottom:1px solid var(--dark);padding-bottom:3px}
+.logo{
+  font-family:"Manrope";
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-1px;
+  color:var(--text)!important;
+  text-decoration:none;
+}
+.links{
+  display:flex;
+  gap:28px;
+  font-size:14px;
+  font-weight:500;
+}
+.links a{
+  color:var(--text)!important;
+  text-decoration:none;
+  transition:.3s;
+}
+.links a:hover{
+  color:var(--text)!important;
+  opacity:.5;
+}
+.start{
+  font-size:14px;
+  font-weight:700;
+  border-bottom:1px solid var(--dark);
+  padding-bottom:3px;
+  color:var(--text)!important;
+  text-decoration:none;
+}
 
 /* ===== COMMON ===== */
-section{padding:100px 70px;background:var(--paper)}
+section{padding:100px 70px;background:rgba(245,242,237,.48);backdrop-filter:blur(3px)}
 .kicker{
   font-size:13px;color:var(--muted);margin-bottom:12px;
   text-transform:uppercase;letter-spacing:1px
@@ -79,16 +203,35 @@ h2{
 .primary-btn{background:var(--dark);color:#fff}.secondary-btn{border:1px solid var(--dark)}
 
 .hero-portrait{
-  position:absolute;top:5%;right:3%;bottom:8%;left:58%;z-index:2;
-  overflow:hidden;border-radius:20px;border:2px solid rgba(0,243,255,.4);
-  box-shadow:0 0 20px rgba(0,243,255,.2),inset 0 0 15px rgba(0,243,255,.15);
-  background:rgba(0,0,0,.05);transition:transform .1s,box-shadow .3s;
-  transform-style:preserve-3d;will-change:transform;
+  position:absolute;
+  top:5%;right:3%;bottom:8%;left:58%;
+  z-index:2;
+  overflow:hidden;
+  border-radius:24px;
+  border:1px solid rgba(200,138,74,.34);
+  box-shadow:
+    0 24px 55px rgba(0,0,0,.18),
+    0 0 35px rgba(200,138,74,.10),
+    inset 0 0 25px rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  transition:transform .1s,box-shadow .3s;
+  transform-style:preserve-3d;
+  will-change:transform;
 }
-.hero-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;pointer-events:none}
+.hero-portrait img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 18%;
+  display:block;
+  pointer-events:none;
+}
 .hero-portrait:after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,var(--bg) 0%,rgba(232,227,220,.35) 10%,transparent 40%)
+  content:"";
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(232,227,220,.30) 0%,transparent 18%),
+    linear-gradient(180deg,rgba(255,255,255,.05),transparent 28%,rgba(0,0,0,.05));
 }
 .availability{
   position:absolute;z-index:5;left:70px;bottom:48px;display:flex;align-items:center;
@@ -110,7 +253,7 @@ h2{
 .about-text{font-size:20px;line-height:1.7;color:#4c4d50}
 
 /* ===== SKILLS ===== */
-.skills-section{background:var(--bg)}
+.skills-section{background:rgba(232,227,220,.34)}
 .skills-grid{margin-top:50px;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
 .skill{
   padding:28px 18px;border:1px solid var(--line);border-radius:12px;
@@ -135,7 +278,13 @@ h2{
 .service p{font-size:14px;line-height:1.6;color:var(--muted);transform:translateZ(10px)}
 
 /* ===== WORK ===== */
-.portfolio{background:var(--dark);color:#fff}
+.portfolio{
+  background:
+    radial-gradient(circle at 10% 20%,rgba(0,243,255,.055),transparent 30%),
+    radial-gradient(circle at 90% 80%,rgba(255,0,127,.05),transparent 30%),
+    rgba(17,18,20,.94);
+  color:#fff;
+}
 .portfolio .kicker{color:#aaa}
 .portfolio-grid{
   margin-top:55px;display:grid;grid-template-columns:repeat(2,1fr);
@@ -156,7 +305,10 @@ h2{
 
 /* ===== AUTO GALLERY ===== */
 .gallery-section{
-  background:var(--dark);color:#fff;padding:90px 0 95px;overflow:hidden;
+  background:
+    radial-gradient(circle at 80% 30%,rgba(0,243,255,.055),transparent 30%),
+    radial-gradient(circle at 20% 70%,rgba(125,75,255,.045),transparent 32%),
+    rgba(17,18,20,.94);color:#fff;padding:90px 0 95px;overflow:hidden;
   border-top:1px solid rgba(255,255,255,.08)
 }
 .gallery-inner{padding:0 70px}
@@ -197,7 +349,7 @@ h2{
 }
 
 /* ===== CONTACT ===== */
-.contact{text-align:center;background:#ded7ce}
+.contact{text-align:center;background:rgba(222,215,206,.42);backdrop-filter:blur(4px)}
 .contact h2{max-width:800px;margin:auto}
 .contact p:not(.kicker){max-width:580px;margin:25px auto;font-size:18px;line-height:1.6;color:var(--muted)}
 .contact-btn{
@@ -415,10 +567,229 @@ footer{
   .video-section{padding:60px 20px}
 }
 
+
+.hero,.about,.skills-section,#services,.contact{position:relative}
+.hero::before,.about::before,.skills-section::before,#services::before,.contact::before{
+  content:"";position:absolute;width:340px;height:340px;border-radius:50%;
+  filter:blur(80px);opacity:.16;pointer-events:none;z-index:0;
+}
+.hero::before{background:#00f3ff;left:-170px;top:80px}
+.about::before{background:#ff007f;right:-170px;top:10px}
+.skills-section::before{background:#7d4bff;left:30%;bottom:-190px}
+#services::before{background:#00f3ff;right:-160px;top:30px}
+.contact::before{background:#ff9f00;left:-150px;bottom:-170px}
+.hero>* ,.about>* ,.skills-section>* ,#services>* ,.contact>*{position:relative;z-index:1}
+@media(prefers-reduced-motion:reduce){body::before{animation:none}}
+
+/* ===== PREMIUM MOTION BACKGROUND ===== */
+
+body::after{
+  content:"";position:fixed;inset:-5%;z-index:-3;pointer-events:none;
+  opacity:.20;
+  background-image:
+    linear-gradient(rgba(0,243,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,0,127,.03) 1px,transparent 1px);
+  background-size:70px 70px;
+  mask-image:radial-gradient(ellipse at center,#000 0%,rgba(0,0,0,.8) 45%,transparent 82%);
+  animation:gridDrift 28s linear infinite;
+}
+.motion-glow{
+  position:fixed;z-index:-2;pointer-events:none;border-radius:50%;
+  filter:blur(2px);mix-blend-mode:screen;opacity:.42;
+}
+.motion-glow.one{
+  width:180px;height:180px;left:7vw;top:22vh;
+  background:radial-gradient(circle,rgba(0,243,255,.30),transparent 68%);
+  animation:glowOne 13s ease-in-out infinite alternate;
+}
+.motion-glow.two{
+  width:220px;height:220px;right:5vw;top:42vh;
+  background:radial-gradient(circle,rgba(255,0,127,.24),transparent 70%);
+  animation:glowTwo 17s ease-in-out infinite alternate;
+}
+.motion-glow.three{
+  width:200px;height:200px;left:38vw;bottom:5vh;
+  background:radial-gradient(circle,rgba(122,78,255,.22),transparent 70%);
+  animation:glowThree 15s ease-in-out infinite alternate;
+}
+@keyframes colorOrbit{
+  0%{transform:translate3d(-2%,-1%,0) scale(1)}
+  35%{transform:translate3d(2%,2%,0) scale(1.04)}
+  70%{transform:translate3d(-1%,3%,0) scale(1.02)}
+  100%{transform:translate3d(2%,-2%,0) scale(1.06)}
+}
+@keyframes gridDrift{
+  from{background-position:0 0,0 0}
+  to{background-position:70px 35px,-35px 70px}
+}
+@keyframes glowOne{
+  from{transform:translate(0,0) scale(.8)}
+  to{transform:translate(45vw,18vh) scale(1.3)}
+}
+@keyframes glowTwo{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(-32vw,-20vh) scale(.75)}
+}
+@keyframes glowThree{
+  from{transform:translate(-10vw,5vh) scale(.8)}
+  to{transform:translate(20vw,-28vh) scale(1.35)}
+}
+@media(max-width:900px){
+  body::before{filter:blur(38px)}
+  body::after{background-size:50px 50px}
+  .motion-glow{opacity:.25}
+  .motion-glow.one{width:130px;height:130px}
+  .motion-glow.two{width:150px;height:150px}
+  .motion-glow.three{width:140px;height:140px}
+}
+@media(prefers-reduced-motion:reduce){
+  body::before,body::after,.motion-glow{animation:none!important}
+}
+
+
+
+
+/* Keep the original blue/cyan typography accents */
+/* Restore the original neutral typography — keep blue only for intentional accents */
+.hero h1 span,
+.hero .eyebrow,
+.section-head h2,
+.kicker,
+.service-card h3,
+.project-title,
+.video-caption h3,
+.gallery-section .section-head h2,
+.view-all,
+.skill-card h3,
+.stat-number{
+  color:var(--text);
+}
+a:hover{color:inherit}
+nav a,
+nav a:visited,
+nav a:active{
+  color:var(--text)!important;
+}
+
+/* ===== HERO IMAGE RESPONSIVE FINISH ===== */
+@media(max-width:1100px){
+  .hero-portrait{
+    left:50%;
+    right:2.5%;
+    top:5%;
+    bottom:8%;
+  }
+}
+@media(max-width:900px){
+  .hero-portrait{
+    width:calc(100% - 50px);
+    height:min(112vw,520px);
+    max-height:520px;
+    margin:30px auto 0;
+    border-radius:22px;
+  }
+  .hero-portrait img{
+    object-position:50% 16%;
+  }
+}
+@media(max-width:600px){
+  .hero-portrait{
+    width:calc(100% - 40px);
+    height:min(125vw,430px);
+    margin-top:28px;
+    border-radius:20px;
+  }
+  .hero-portrait img{
+    object-position:50% 15%;
+  }
+}
+
+/* ===== 3D SERVICE ICONS ===== */
+.service .icon-3d{
+  width:78px;height:78px;
+  margin-bottom:22px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  border-radius:22px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.34),rgba(255,255,255,.06)),
+    linear-gradient(145deg,#3a332c,#141414);
+  border:1px solid rgba(200,138,74,.30);
+  box-shadow:
+    0 16px 28px rgba(0,0,0,.20),
+    inset 5px 5px 12px rgba(255,255,255,.11),
+    inset -8px -8px 14px rgba(0,0,0,.42);
+  transform:perspective(700px) rotateX(8deg) rotateY(-8deg);
+  transform-style:preserve-3d;
+  overflow:hidden;
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+.service .icon-3d::before{
+  content:"";
+  position:absolute;inset:7px;border-radius:17px;
+  background:linear-gradient(135deg,rgba(255,255,255,.16),transparent 45%,rgba(0,0,0,.15));
+  pointer-events:none;
+}
+.service .icon-3d::after{
+  content:"";
+  position:absolute;
+  width:20px;height:110px;
+  left:-25px;top:-20px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.30),transparent);
+  transform:rotate(25deg);
+  filter:blur(2px);
+  animation:serviceIconShine 5.5s ease-in-out infinite;
+}
+.service:hover .icon-3d{
+  transform:perspective(700px) rotateX(0) rotateY(0) translateY(-8px) scale(1.06);
+  box-shadow:
+    0 24px 38px rgba(0,0,0,.25),
+    0 0 22px rgba(200,138,74,.10),
+    inset 6px 6px 14px rgba(255,255,255,.12),
+    inset -9px -9px 16px rgba(0,0,0,.44);
+}
+.icon-3d svg{
+  width:52px;height:52px;
+  position:relative;z-index:2;
+  transform:translateZ(18px);
+  overflow:visible;
+  filter:drop-shadow(3px 6px 5px rgba(0,0,0,.45));
+}
+.icon-main{fill:#d49a5c;stroke:#f2c58f;stroke-width:1.2}
+.icon-shadow{fill:#5f432d;opacity:.72}
+.icon-highlight{fill:#f4d4aa;opacity:.92}
+.icon-depth{fill:#8b5d38}
+.icon-accent{fill:#c47e3f}
+.icon-tip{fill:#2b2119}
+.icon-spark{fill:#f1c27d}
+@keyframes serviceIconShine{
+  0%,62%{transform:translateX(-80px) rotate(25deg);opacity:0}
+  70%{opacity:.65}
+  100%{transform:translateX(130px) rotate(25deg);opacity:0}
+}
+@media(max-width:600px){
+  .service .icon-3d{
+    width:68px;height:68px;border-radius:19px;
+  }
+  .icon-3d svg{width:46px;height:46px}
+}
 </style>
 </head>
 
 <body>
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+<div class="bubble b4"></div>
+<div class="bubble b5"></div>
+<div class="bubble b6"></div>
+<div class="bubble b7"></div>
+<div class="bubble b8"></div>
+<div class="motion-glow one"></div>
+<div class="motion-glow two"></div>
+<div class="motion-glow three"></div>
+<div class="color-ribbon r1"></div>
+<div class="color-ribbon r2"></div>
 
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
@@ -512,22 +883,55 @@ footer{
 
   <div class="services">
     <article class="service tilt-card">
-      <div class="icon">✦</div>
+      <div class="icon icon-3d" aria-hidden="true">
+        <svg viewBox="0 0 64 64" role="img">
+          <path class="icon-shadow" d="M15 47 43 19l8 8-28 28z"/>
+          <path class="icon-main" d="m18 44 24-24 7 7-24 24-9 2z"/>
+          <path class="icon-highlight" d="m43 16 5-5 7 7-5 5z"/>
+          <path class="icon-tip" d="m18 44-2 9 9-2z"/>
+        </svg>
+      </div>
       <h3>Graphic Designing</h3>
       <p>Transforming ideas into creative and visually engaging designs that help brands stand out and connect with their audience.</p>
     </article>
+
     <article class="service tilt-card">
-      <div class="icon">▶</div>
+      <div class="icon icon-3d" aria-hidden="true">
+        <svg viewBox="0 0 64 64" role="img">
+          <path class="icon-shadow" d="M16 12h34l-8 40H8z"/>
+          <path class="icon-main" d="M17 11h34L43 49H9z"/>
+          <path class="icon-highlight" d="m30 21 16 9-18 11z"/>
+          <path class="icon-depth" d="m28 41 18-11-2 10-16 9z"/>
+        </svg>
+      </div>
       <h3>Motion &amp; Video Editing</h3>
       <p>Bringing ideas to life through creative motion graphics, smooth transitions, and engaging video storytelling.</p>
     </article>
+
     <article class="service tilt-card">
-      <div class="icon">◈</div>
+      <div class="icon icon-3d" aria-hidden="true">
+        <svg viewBox="0 0 64 64" role="img">
+          <path class="icon-shadow" d="M32 7 51 18v28L32 57 13 46V18z"/>
+          <path class="icon-main" d="m32 8 18 10v27L32 55 14 45V18z"/>
+          <path class="icon-highlight" d="m32 18 9 5-9 5-9-5z"/>
+          <path class="icon-depth" d="M23 28v11l9 5V28z"/>
+          <path class="icon-accent" d="M32 28v16l9-5V23z"/>
+          <circle class="icon-spark" cx="47" cy="14" r="3"/>
+        </svg>
+      </div>
       <h3>AI Smart Rehearse</h3>
       <p>Practice smarter with AI, improve communication, gain confidence, and prepare for important conversations.</p>
     </article>
+
     <article class="service tilt-card">
-      <div class="icon">▣</div>
+      <div class="icon icon-3d" aria-hidden="true">
+        <svg viewBox="0 0 64 64" role="img">
+          <path class="icon-shadow" d="m39 9 8 8-6 6 10 10-8 8-10-10-7 7-8-8z"/>
+          <path class="icon-main" d="m37 8 9 9-6 6 10 10-9 9-10-10-7 7-9-9z"/>
+          <path class="icon-highlight" d="m37 8 9 9-6 6-9-9z"/>
+          <path class="icon-depth" d="m35 42 10-9 5 5-9 9z"/>
+        </svg>
+      </div>
       <h3>Troubleshooting</h3>
       <p>A specialized service dedicated to identifying and fixing flaws, inconsistencies, and technical errors in existing designs or videos.</p>
     </article>
@@ -667,14 +1071,14 @@ footer{
         <p class="kicker">Gallery</p>
         <h2>More of my work.</h2>
       </div>
-      <p class="gallery-note">A selection of designs and creative work. Hover to pause the gallery.</p>
+      <p class="gallery-note">A selection of designs and creative work. The gallery continuously slides; hover to pause on desktop.</p>
     </div>
   </div>
 
   <div class="gallery-marquee">
     <div class="gallery-track">
 
-      <!-- SET 1: DEDICATED GALLERY IMAGES -->
+      <!-- SET 1: 14 SEPARATE GALLERY IMAGES -->
       <div class="gallery-item"><img src="gallery1.jpg" alt="Gallery Work 1"></div>
       <div class="gallery-item"><img src="gallery2.jpg" alt="Gallery Work 2"></div>
       <div class="gallery-item"><img src="gallery3.jpg" alt="Gallery Work 3"></div>
@@ -683,6 +1087,12 @@ footer{
       <div class="gallery-item"><img src="gallery6.jpg" alt="Gallery Work 6"></div>
       <div class="gallery-item"><img src="gallery7.jpg" alt="Gallery Work 7"></div>
       <div class="gallery-item"><img src="gallery8.jpg" alt="Gallery Work 8"></div>
+      <div class="gallery-item"><img src="gallery9.jpg" alt="Gallery Work 9"></div>
+      <div class="gallery-item"><img src="gallery10.jpg" alt="Gallery Work 10"></div>
+      <div class="gallery-item"><img src="gallery11.jpg" alt="Gallery Work 11"></div>
+      <div class="gallery-item"><img src="gallery12.jpg" alt="Gallery Work 12"></div>
+      <div class="gallery-item"><img src="gallery13.jpg" alt="Gallery Work 13"></div>
+      <div class="gallery-item"><img src="gallery14.jpg" alt="Gallery Work 14"></div>
 
       <!-- SET 2: DUPLICATE FOR SEAMLESS LOOP -->
       <div class="gallery-item"><img src="gallery1.jpg" alt="Gallery Work 1"></div>
@@ -693,6 +1103,13 @@ footer{
       <div class="gallery-item"><img src="gallery6.jpg" alt="Gallery Work 6"></div>
       <div class="gallery-item"><img src="gallery7.jpg" alt="Gallery Work 7"></div>
       <div class="gallery-item"><img src="gallery8.jpg" alt="Gallery Work 8"></div>
+      <div class="gallery-item"><img src="gallery9.jpg" alt="Gallery Work 9"></div>
+      <div class="gallery-item"><img src="gallery10.jpg" alt="Gallery Work 10"></div>
+      <div class="gallery-item"><img src="gallery11.jpg" alt="Gallery Work 11"></div>
+      <div class="gallery-item"><img src="gallery12.jpg" alt="Gallery Work 12"></div>
+      <div class="gallery-item"><img src="gallery13.jpg" alt="Gallery Work 13"></div>
+      <div class="gallery-item"><img src="gallery14.jpg" alt="Gallery Work 14"></div>
+
     </div>
   </div>
 </section>
@@ -885,13 +1302,8 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
 </body>
 <!--
   GALLERY IMAGE FILES:
-  gallery1.jpg
-  gallery2.jpg
-  gallery3.jpg
-  gallery4.jpg
-  gallery5.jpg
-  gallery6.jpg
-  gallery7.jpg
-  gallery8.jpg
+  gallery1.jpg ... gallery14.jpg
+  Featured Projects remain project1.jpg ... project6.jpg.
+  Videos remain video1.mp4 ... video5.mp4.
 -->
 </html>
