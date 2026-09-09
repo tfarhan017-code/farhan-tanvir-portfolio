@@ -655,6 +655,11 @@ footer{
 </section>
 
 <!-- GALLERY -->
+<!--
+  Featured Projects use: project1.jpg ... project6.jpg
+  Gallery uses separate files: gallery1.jpg ... gallery8.jpg
+  Add/replace these gallery images without changing Featured Projects.
+-->
 <section class="gallery-section" id="gallery">
   <div class="gallery-inner">
     <div class="gallery-title-row">
@@ -669,22 +674,25 @@ footer{
   <div class="gallery-marquee">
     <div class="gallery-track">
 
-      <!-- SET 1 -->
-      <div class="gallery-item" onclick="openProject('project1')"><img src="project1.jpg" alt="Read Mood"></div>
-      <div class="gallery-item" onclick="openProject('project2')"><img src="project2.jpg" alt="Visual Stories"></div>
-      <div class="gallery-item" onclick="openProject('project3')"><img src="project3.jpg" alt="Brand Identity"></div>
-      <div class="gallery-item" onclick="openProject('project4')"><img src="project4.jpg" alt="Digital Campaign"></div>
-      <div class="gallery-item" onclick="openProject('project5')"><img src="project5.jpg" alt="AI Smart Rehearse"></div>
-      <div class="gallery-item" onclick="openProject('project6')"><img src="project6.jpg" alt="Branding"></div>
+      <!-- SET 1: DEDICATED GALLERY IMAGES -->
+      <div class="gallery-item"><img src="gallery1.jpg" alt="Gallery Work 1"></div>
+      <div class="gallery-item"><img src="gallery2.jpg" alt="Gallery Work 2"></div>
+      <div class="gallery-item"><img src="gallery3.jpg" alt="Gallery Work 3"></div>
+      <div class="gallery-item"><img src="gallery4.jpg" alt="Gallery Work 4"></div>
+      <div class="gallery-item"><img src="gallery5.jpg" alt="Gallery Work 5"></div>
+      <div class="gallery-item"><img src="gallery6.jpg" alt="Gallery Work 6"></div>
+      <div class="gallery-item"><img src="gallery7.jpg" alt="Gallery Work 7"></div>
+      <div class="gallery-item"><img src="gallery8.jpg" alt="Gallery Work 8"></div>
 
       <!-- SET 2: DUPLICATE FOR SEAMLESS LOOP -->
-      <div class="gallery-item" onclick="openProject('project1')"><img src="project1.jpg" alt="Read Mood"></div>
-      <div class="gallery-item" onclick="openProject('project2')"><img src="project2.jpg" alt="Visual Stories"></div>
-      <div class="gallery-item" onclick="openProject('project3')"><img src="project3.jpg" alt="Brand Identity"></div>
-      <div class="gallery-item" onclick="openProject('project4')"><img src="project4.jpg" alt="Digital Campaign"></div>
-      <div class="gallery-item" onclick="openProject('project5')"><img src="project5.jpg" alt="AI Smart Rehearse"></div>
-      <div class="gallery-item" onclick="openProject('project6')"><img src="project6.jpg" alt="Branding"></div>
-
+      <div class="gallery-item"><img src="gallery1.jpg" alt="Gallery Work 1"></div>
+      <div class="gallery-item"><img src="gallery2.jpg" alt="Gallery Work 2"></div>
+      <div class="gallery-item"><img src="gallery3.jpg" alt="Gallery Work 3"></div>
+      <div class="gallery-item"><img src="gallery4.jpg" alt="Gallery Work 4"></div>
+      <div class="gallery-item"><img src="gallery5.jpg" alt="Gallery Work 5"></div>
+      <div class="gallery-item"><img src="gallery6.jpg" alt="Gallery Work 6"></div>
+      <div class="gallery-item"><img src="gallery7.jpg" alt="Gallery Work 7"></div>
+      <div class="gallery-item"><img src="gallery8.jpg" alt="Gallery Work 8"></div>
     </div>
   </div>
 </section>
@@ -875,4 +883,15 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
 </script>
 
 </body>
+<!--
+  GALLERY IMAGE FILES:
+  gallery1.jpg
+  gallery2.jpg
+  gallery3.jpg
+  gallery4.jpg
+  gallery5.jpg
+  gallery6.jpg
+  gallery7.jpg
+  gallery8.jpg
+-->
 </html>
