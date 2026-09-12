@@ -53,7 +53,7 @@ nav{
 .links a{transition:.3s}.links a:hover{opacity:.5}
 .start{font-size:14px;font-weight:700;border-bottom:1px solid var(--dark);padding-bottom:3px}
 
-/* ===== COMMON ===== */
+/* Common */
 section{padding:100px 70px;background:var(--paper)}
 .kicker{
   font-size:13px;color:var(--muted);margin-bottom:12px;
@@ -394,15 +394,6 @@ footer{
   line-height:1.5;
   margin-top:7px;
 }
-.video-empty{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:250px;
-  color:#999;
-  text-align:center;
-  padding:30px;
-}
 @media(max-width:1100px){
   .video-section{padding:80px 50px}
   .video-grid{grid-template-columns:repeat(2,1fr)}
@@ -567,7 +558,6 @@ footer{
   </div>
 </section>
 
-
 <!-- VIDEO SHOWCASE -->
 <section class="video-section" id="videos">
   <div class="section-head">
@@ -579,8 +569,6 @@ footer{
   </div>
 
   <div class="video-grid">
-
-    <!-- Replace video1.mp4, video2.mp4, video3.mp4 with your own videos -->
     <article class="video-card tilt-card">
       <div class="video-wrap">
         <video controls playsinline preload="metadata" poster="project2.jpg">
@@ -655,11 +643,6 @@ footer{
 </section>
 
 <!-- GALLERY -->
-<!--
-  Featured Projects use: project1.jpg ... project6.jpg
-  Gallery uses separate files: gallery1.jpg ... gallery8.jpg
-  Add/replace these gallery images without changing Featured Projects.
--->
 <section class="gallery-section" id="gallery">
   <div class="gallery-inner">
     <div class="gallery-title-row">
@@ -673,9 +656,7 @@ footer{
 
   <div class="gallery-marquee">
     <div class="gallery-track">
-
-      <!-- SET 1: DEDICATED GALLERY IMAGES -->
-      <div class="gallery-item"><img src="gallery1.jpg" alt="Gallery Work 1"></div>
+            <div class="gallery-item"><img src="gallery1.jpg" alt="Gallery Work 1"></div>
       <div class="gallery-item"><img src="gallery2.jpg" alt="Gallery Work 2"></div>
       <div class="gallery-item"><img src="gallery3.jpg" alt="Gallery Work 3"></div>
       <div class="gallery-item"><img src="gallery4.jpg" alt="Gallery Work 4"></div>
@@ -689,8 +670,6 @@ footer{
       <div class="gallery-item"><img src="gallery12.jpg" alt="Gallery Work 12"></div>
       <div class="gallery-item"><img src="gallery13.jpg" alt="Gallery Work 13"></div>
       <div class="gallery-item"><img src="gallery14.jpg" alt="Gallery Work 14"></div>
-
-      <!-- SET 2: DUPLICATE FOR SEAMLESS LOOP -->
       <div class="gallery-item"><img src="gallery1.jpg" alt="Gallery Work 1"></div>
       <div class="gallery-item"><img src="gallery2.jpg" alt="Gallery Work 2"></div>
       <div class="gallery-item"><img src="gallery3.jpg" alt="Gallery Work 3"></div>
@@ -699,6 +678,7 @@ footer{
       <div class="gallery-item"><img src="gallery6.jpg" alt="Gallery Work 6"></div>
       <div class="gallery-item"><img src="gallery7.jpg" alt="Gallery Work 7"></div>
       <div class="gallery-item"><img src="gallery8.jpg" alt="Gallery Work 8"></div>
+      <div class="gallery-item"><img src="gallery9.jpg" alt="Gallery Work 9"></div>
       <div class="gallery-item"><img src="gallery10.jpg" alt="Gallery Work 10"></div>
       <div class="gallery-item"><img src="gallery11.jpg" alt="Gallery Work 11"></div>
       <div class="gallery-item"><img src="gallery12.jpg" alt="Gallery Work 12"></div>
@@ -894,15 +874,4 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
 </script>
 
 </body>
-<!--
-  GALLERY IMAGE FILES:
-  gallery1.jpg
-  gallery2.jpg
-  gallery3.jpg
-  gallery4.jpg
-  gallery5.jpg
-  gallery6.jpg
-  gallery7.jpg
-  gallery8.jpg
--->
 </html>
