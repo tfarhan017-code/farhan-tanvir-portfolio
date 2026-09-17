@@ -185,7 +185,7 @@ h2{
 .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s,filter .55s}
 .gallery-item:hover img{transform:scale(1.08);filter:brightness(.68)}
 .gallery-item:after{
-  content:"Build your brand now.↗";position:absolute;left:18px;right:18px;bottom:14px;
+  content:"This is owner↗";position:absolute;left:18px;right:18px;bottom:14px;
   padding:10px 12px;border-radius:9px;background:rgba(0,0,0,.72);
   backdrop-filter:blur(7px);color:#fff;font-size:12px;font-weight:600;
   opacity:0;transform:translateY(10px);transition:.35s
@@ -406,6 +406,377 @@ footer{
   .video-section{padding:60px 20px}
 }
 
+/* Modern Video Showcase */
+.video-section{
+  background:
+    radial-gradient(circle at 15% 20%, rgba(0,238,255,.08), transparent 28%),
+    radial-gradient(circle at 85% 70%, rgba(255,45,154,.07), transparent 30%),
+    var(--bg);
+  padding: 95px 70px 110px;
+  position: relative;
+  overflow: hidden;
+}
+.video-section::before{
+  content:"VIDEO";
+  position:absolute;
+  right:-40px;
+  top:70px;
+  font-size:clamp(90px,15vw,220px);
+  font-weight:900;
+  letter-spacing:-.08em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.045);
+  pointer-events:none;
+}
+.video-top{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:35px;
+  position:relative;
+  z-index:1;
+  margin-bottom:34px;
+}
+.video-kicker{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#ff2d9a;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.video-kicker::before{
+  content:"";
+  width:8px;height:8px;border-radius:50%;
+  background:#ff2d9a;
+  box-shadow:0 0 14px rgba(255,45,154,.8);
+}
+.video-heading{
+  margin:0;
+  font-size:clamp(44px,6vw,78px);
+  line-height:.95;
+  letter-spacing:-.055em;
+}
+.video-intro{
+  max-width:390px;
+  color:rgba(255,255,255,.62);
+  line-height:1.65;
+  font-size:15px;
+}
+.video-intro .video-cta{
+  display:inline-flex;
+  margin-top:17px;
+  padding:12px 18px;
+  border:1px solid #00eaff;
+  border-radius:9px;
+  color:#00eaff;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.06em;
+  transition:.25s ease;
+}
+.video-intro .video-cta:hover{
+  background:#00eaff;
+  color:#061014;
+  box-shadow:0 0 28px rgba(0,234,255,.35);
+}
+.video-filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:0 0 30px;
+  position:relative;
+  z-index:2;
+}
+.video-filter{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.045);
+  color:rgba(255,255,255,.72);
+  border-radius:999px;
+  padding:10px 18px;
+  font:inherit;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.25s ease;
+}
+.video-filter:hover,.video-filter.active{
+  border-color:#00eaff;
+  color:#00eaff;
+  box-shadow:0 0 18px rgba(0,234,255,.12);
+}
+.video-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);
+  gap:22px;
+  position:relative;
+  z-index:1;
+}
+.video-feature{
+  min-height:455px;
+  border:1px solid rgba(0,234,255,.72);
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  background:#080b0f;
+  box-shadow:0 0 35px rgba(0,234,255,.08);
+}
+.video-feature .video-wrap{
+  height:100%;
+  min-height:455px;
+  aspect-ratio:auto;
+}
+.video-feature .video-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:flex-end;
+  padding:34px;
+  background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.08) 72%),linear-gradient(0deg,rgba(0,0,0,.7),transparent 55%);
+  pointer-events:none;
+}
+.video-feature-copy{
+  max-width:360px;
+}
+.video-badge{
+  display:inline-flex;
+  padding:6px 10px;
+  border-radius:5px;
+  background:#ff2d9a;
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:13px;
+}
+.video-feature-copy h3{
+  margin:0 0 9px;
+  font-size:clamp(28px,3.5vw,48px);
+  letter-spacing:-.04em;
+}
+.video-feature-copy p{
+  margin:0;
+  color:rgba(255,255,255,.7);
+  line-height:1.55;
+  font-size:14px;
+}
+.video-feature .video-play{
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:76px;height:76px;
+}
+.video-play{
+  border:1px solid rgba(0,234,255,.9);
+  border-radius:50%;
+  background:rgba(4,10,14,.62);
+  color:#00eaff;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+  transition:.25s ease;
+  z-index:3;
+}
+.video-play::after{
+  content:"";
+  width:0;height:0;
+  border-top:9px solid transparent;
+  border-bottom:9px solid transparent;
+  border-left:14px solid currentColor;
+  margin-left:4px;
+}
+.video-play:hover{
+  transform:translate(-50%,-50%) scale(1.08);
+  background:#00eaff;
+  color:#071015;
+  box-shadow:0 0 35px rgba(0,234,255,.45);
+}
+.video-feature .video-play:hover{transform:translate(-50%,-50%) scale(1.08)}
+.video-side{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.video-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:15px;
+  overflow:hidden;
+  transition:.3s ease;
+  min-width:0;
+}
+.video-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(0,234,255,.55);
+  box-shadow:0 15px 40px rgba(0,0,0,.3),0 0 24px rgba(0,234,255,.08);
+}
+.video-card.hidden{display:none}
+.video-wrap{
+  aspect-ratio:16/10;
+  position:relative;
+  overflow:hidden;
+  background:#050608;
+}
+.video-wrap video{
+  width:100%;height:100%;
+  display:block;
+  object-fit:cover;
+}
+.video-card .video-thumb{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  transition:transform .45s ease;
+}
+.video-card:hover .video-thumb{transform:scale(1.04)}
+.video-card .video-play{
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:52px;height:52px;
+}
+.video-card .video-play:hover{transform:translate(-50%,-50%) scale(1.08)}
+.video-duration{
+  position:absolute;
+  right:9px;top:9px;
+  background:rgba(0,0,0,.72);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:5px;
+  padding:4px 6px;
+  font-size:10px;
+  font-weight:800;
+  z-index:2;
+}
+.video-info{padding:15px 16px 17px}
+.video-meta{
+  color:#00eaff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.video-card:nth-child(even) .video-meta{color:#ff2d9a}
+.video-info h4{
+  margin:0;
+  font-size:15px;
+  line-height:1.3;
+}
+.video-year{
+  margin-top:7px;
+  color:rgba(255,255,255,.42);
+  font-size:11px;
+}
+.video-watch{
+  display:inline-block;
+  margin-top:12px;
+  color:#00eaff;
+  font-size:11px;
+  font-weight:800;
+  text-decoration:none;
+}
+.video-bottom{
+  margin-top:22px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:14px;
+  padding:18px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  background:rgba(255,255,255,.025);
+}
+.video-bottom strong{font-size:15px}
+.video-bottom span{display:block;color:rgba(255,255,255,.5);font-size:12px;margin-top:4px}
+.video-bottom a{
+  display:inline-flex;
+  padding:12px 18px;
+  border:1px solid #00eaff;
+  border-radius:8px;
+  color:#00eaff;
+  text-decoration:none;
+  font-size:11px;
+  font-weight:900;
+}
+.video-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  place-items:center;
+  padding:25px;
+  background:rgba(0,0,0,.84);
+  backdrop-filter:blur(12px);
+}
+.video-modal.open{display:grid}
+.video-modal-inner{
+  width:min(1050px,96vw);
+  position:relative;
+  border:1px solid rgba(0,234,255,.55);
+  border-radius:17px;
+  overflow:hidden;
+  background:#06090d;
+  box-shadow:0 0 55px rgba(0,234,255,.13);
+}
+.video-modal-head{
+  padding:14px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+.video-modal-close{
+  border:0;
+  background:none;
+  color:#fff;
+  font-size:27px;
+  line-height:1;
+  cursor:pointer;
+}
+.video-modal video{
+  display:block;
+  width:100%;
+  max-height:78vh;
+  background:#000;
+}
+@media(max-width:1100px){
+  .video-section{padding:80px 45px 90px}
+  .video-layout{grid-template-columns:1fr}
+  .video-feature{min-height:430px}
+  .video-feature .video-wrap{min-height:430px}
+}
+@media(max-width:700px){
+  .video-section{padding:70px 20px 80px}
+  .video-top{display:block}
+  .video-intro{margin-top:18px}
+  .video-side{grid-template-columns:1fr 1fr}
+  .video-feature,.video-feature .video-wrap{min-height:340px}
+  .video-feature .video-overlay{padding:20px}
+  .video-feature-copy{max-width:260px}
+  .video-feature-copy h3{font-size:30px}
+  .video-filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:5px}
+  .video-filter{white-space:nowrap}
+  .video-bottom{display:block}
+  .video-bottom a{margin-top:14px}
+}
+@media(max-width:480px){
+  .video-side{grid-template-columns:1fr}
+  .video-feature,.video-feature .video-wrap{min-height:300px}
+}
+</style>
+
+<style>
+.editorial-work{padding:110px 0 130px}.work-heading{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:55px}.work-heading h2{margin:8px 0 0;font-size:clamp(48px,7vw,92px);line-height:.88;letter-spacing:-.055em}.work-heading h2 span{opacity:.35}.work-count{display:flex;gap:12px;align-items:center;margin-bottom:8px}.work-count span{font-size:14px;font-weight:700}.work-count small{font-size:11px;text-transform:uppercase;letter-spacing:.12em;opacity:.5}.editorial-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:34px;align-items:start}.editorial-project{position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.8,.2,1)}.project-image{position:relative;width:100%;overflow:hidden;background:#ddd}.project-large .project-image{aspect-ratio:1.25/1}.project-small .project-image{aspect-ratio:.9/1}.project-wide .project-image{aspect-ratio:1.65/1}.project-medium .project-image{aspect-ratio:1.2/1}.project-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}.editorial-project:hover .project-image img{transform:scale(1.055)}.image-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 45%,rgba(0,0,0,.52));opacity:.65;transition:opacity .4s}.editorial-project:hover .image-overlay{opacity:.9}.project-meta{display:flex;align-items:center;gap:12px;margin-top:17px}.project-number{font-size:11px;font-weight:700;letter-spacing:.08em;opacity:.45}.project-category{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.6}.project-meta:before{content:"";width:28px;height:1px;background:currentColor;opacity:.35}.project-title-row{display:flex;align-items:center;justify-content:space-between;margin-top:9px}.project-title-row h3{margin:0;font-size:clamp(22px,2.3vw,34px);line-height:1;letter-spacing:-.035em;font-weight:600}.project-arrow{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid currentColor;border-radius:50%;font-size:19px;opacity:.35;transform:translate(-5px,5px) rotate(-20deg);transition:.4s}.editorial-project:hover .project-arrow{opacity:1;transform:none}.project-large{grid-column:1;grid-row:span 2}.project-small{grid-column:2}.project-wide{grid-column:1/-1;width:72%;margin-left:auto;margin-top:25px}.project-medium{margin-top:10px}.project-medium:nth-last-child(2){grid-column:1}.project-medium:last-child{grid-column:2}.editorial-project:after{content:"";position:absolute;top:-8px;right:-8px;width:7px;height:7px;border-radius:50%;background:#35d5e8;opacity:0;transform:scale(.5);transition:.3s}.editorial-project:hover:after{opacity:1;transform:scale(1)}@media(max-width:900px){.editorial-work{padding:80px 0 90px}.editorial-grid{grid-template-columns:1fr 1fr;gap:22px}.project-large{grid-column:1/-1;grid-row:auto}.project-large .project-image{aspect-ratio:1.5/1}.project-wide{grid-column:1/-1;width:100%;margin-top:5px}.project-medium:nth-last-child(2),.project-medium:last-child{grid-column:auto}}@media(max-width:600px){.editorial-work{padding:65px 0 75px}.work-heading{align-items:flex-start;margin-bottom:35px}.work-heading h2{font-size:15vw}.work-count small{display:none}.editorial-grid{display:flex;flex-direction:column;gap:42px}.editorial-project,.project-wide{width:100%;margin:0}.project-large .project-image,.project-small .project-image,.project-wide .project-image,.project-medium .project-image{aspect-ratio:1.12/1}.project-title-row h3{font-size:25px}.project-arrow{width:34px;height:34px;font-size:16px}.editorial-project:after{display:none}}
 </style>
 </head>
 
@@ -526,121 +897,152 @@ footer{
 </section>
 
 <!-- FEATURED WORK -->
-<section class="portfolio" id="work">
-  <p class="kicker">Selected Work</p>
-  <h2>Featured Projects</h2>
-
-  <div class="portfolio-grid">
-    <div class="project tilt-card" onclick="openProject('project1')">
-      <img src="project1.jpg" alt="Read Mood Project">
-      <div class="project-info"><small>Graphic Design</small><h3>Read Mood</h3></div>
-    </div>
-    <div class="project tilt-card" onclick="openProject('project2')">
-      <img src="project2.jpg" alt="Visual Stories Project">
-      <div class="project-info"><small>Motion &amp; Video Editing</small><h3>Visual Stories</h3></div>
-    </div>
-    <div class="project tilt-card" onclick="openProject('project3')">
-      <img src="project3.jpg" alt="Brand Identity Project">
-      <div class="project-info"><small>Branding</small><h3>Brand Identity</h3></div>
-    </div>
-    <div class="project tilt-card" onclick="openProject('project4')">
-      <img src="project4.jpg" alt="Digital Campaign Project">
-      <div class="project-info"><small>Creative Content</small><h3>Digital Campaign</h3></div>
-    </div>
-    <div class="project tilt-card" onclick="openProject('project5')">
-      <img src="project5.jpg" alt="AI Smart Rehearse Project">
-      <div class="project-info"><small>AI Tool</small><h3>AI Smart Rehearse</h3></div>
-    </div>
-    <div class="project tilt-card" onclick="openProject('project6')">
-      <img src="project6.jpg" alt="Motion Visuals Project">
-      <div class="project-info"><small>Social Media</small><h3>Branding</h3></div>
-    </div>
+<section class="portfolio editorial-work" id="work">
+  <div class="work-heading">
+    <div><p class="kicker">Selected Work</p><h2>Featured<br><span>Projects</span></h2></div>
+    <div class="work-count"><span>06</span><small>Selected Works</small></div>
+  </div>
+  <div class="editorial-grid">
+    <div class="editorial-project project-large tilt-card" onclick="openProject('project1')"><div class="project-image"><img src="project1.jpg" alt="Read Mood Project"><div class="image-overlay"></div></div><div class="project-meta"><span class="project-number">01</span><span class="project-category">GRAPHIC DESIGN</span></div><div class="project-title-row"><h3>Read Mood</h3><span class="project-arrow">↗</span></div></div>
+    <div class="editorial-project project-small tilt-card" onclick="openProject('project2')"><div class="project-image"><img src="project2.jpg" alt="Visual Stories Project"><div class="image-overlay"></div></div><div class="project-meta"><span class="project-number">02</span><span class="project-category">MOTION &amp; VIDEO</span></div><div class="project-title-row"><h3>Visual Stories</h3><span class="project-arrow">↗</span></div></div>
+    <div class="editorial-project project-small tilt-card" onclick="openProject('project3')"><div class="project-image"><img src="project3.jpg" alt="Brand Identity Project"><div class="image-overlay"></div></div><div class="project-meta"><span class="project-number">03</span><span class="project-category">BRANDING</span></div><div class="project-title-row"><h3>Brand Identity</h3><span class="project-arrow">↗</span></div></div>
+    <div class="editorial-project project-wide tilt-card" onclick="openProject('project4')"><div class="project-image"><img src="project4.jpg" alt="Digital Campaign Project"><div class="image-overlay"></div></div><div class="project-meta"><span class="project-number">04</span><span class="project-category">CREATIVE CONTENT</span></div><div class="project-title-row"><h3>Digital Campaign</h3><span class="project-arrow">↗</span></div></div>
+    <div class="editorial-project project-medium tilt-card" onclick="openProject('project5')"><div class="project-image"><img src="project5.jpg" alt="AI Smart Rehearse Project"><div class="image-overlay"></div></div><div class="project-meta"><span class="project-number">05</span><span class="project-category">AI TOOL</span></div><div class="project-title-row"><h3>AI Smart Rehearse</h3><span class="project-arrow">↗</span></div></div>
+    <div class="editorial-project project-medium tilt-card" onclick="openProject('project6')"><div class="project-image"><img src="project6.jpg" alt="Social Media Branding Project"><div class="image-overlay"></div></div><div class="project-meta"><span class="project-number">06</span><span class="project-category">SOCIAL MEDIA</span></div><div class="project-title-row"><h3>Social Branding</h3><span class="project-arrow">↗</span></div></div>
   </div>
 </section>
 
 <!-- VIDEO SHOWCASE -->
 <section class="video-section" id="videos">
-  <div class="section-head">
+  <div class="video-top">
     <div>
-      <p class="kicker">Video Portfolio</p>
-      <h2>Motion &amp; Video.</h2>
+      <div class="video-kicker">My Works</div>
+      <h2 class="video-heading">VIDEO PORTFOLIO<span style="color:#ff2d9a">.</span></h2>
     </div>
-    <a class="view-all" href="#contact">Work With Me ↗</a>
+    <div class="video-intro">
+      Here’s a selection of my best motion graphics, video editing and creative content works.
+      <br>
+      <a class="video-cta" href="#contact">HIRE ME &nbsp; →</a>
+    </div>
   </div>
 
-  <div class="video-grid">
-    <article class="video-card tilt-card">
+  <div class="video-filters" aria-label="Video categories">
+    <button class="video-filter active" data-filter="all">ALL</button>
+    <button class="video-filter" data-filter="showreel">SHOWREEL</button>
+    <button class="video-filter" data-filter="motion">MOTION GRAPHICS</button>
+    <button class="video-filter" data-filter="editing">VIDEO EDITING</button>
+    <button class="video-filter" data-filter="social">SOCIAL MEDIA</button>
+    <button class="video-filter" data-filter="branding">BRANDING</button>
+  </div>
+
+  <div class="video-layout">
+    <article class="video-feature">
       <div class="video-wrap">
-        <video controls playsinline preload="metadata" poster="project211.jpg">
+        <video id="featuredVideo" poster="project2.jpg" preload="metadata" playsinline>
           <source src="video1.mp4" type="video/mp4">
-          Your browser does not support HTML5 video.
         </video>
-      </div>
-      <div class="video-caption">
-        <small>Motion Graphics</small>
-        <h3>Visual Stories</h3>
-        <p>Creative motion, transitions and visual storytelling.</p>
+        <div class="video-overlay">
+          <div class="video-feature-copy">
+            <span class="video-badge">Featured</span>
+            <h3>SHOWREEL</h3>
+            <p>A quick look at my best works in motion graphics, video editing and creative content.</p>
+          </div>
+        </div>
+        <button class="video-play" type="button" data-video="video1.mp4" data-title="Showreel 2024" aria-label="Play showreel"></button>
       </div>
     </article>
 
-    <article class="video-card tilt-card">
-      <div class="video-wrap">
-        <video controls playsinline preload="metadata" poster="project222.jpg">
-          <source src="video2.mp4" type="video/mp4">
-          Your browser does not support HTML5 video.
-        </video>
-      </div>
-      <div class="video-caption">
-        <small>Video Editing</small>
-        <h3>Social Media Video</h3>
-        <p>Short-form editing designed for modern digital platforms.</p>
-      </div>
-    </article>
+    <div class="video-side">
+      <article class="video-card" data-category="motion">
+        <div class="video-wrap">
+          <div class="video-thumb" style="background-image:url('project2.jpg')"></div>
+          <span class="video-duration">00:18</span>
+          <button class="video-play" type="button" data-video="video1.mp4" data-title="Visual Stories"></button>
+        </div>
+        <div class="video-info">
+          <div class="video-meta">Motion Graphics</div>
+          <h4>Visual Stories</h4>
+          <div class="video-year">2024</div>
+          <a class="video-watch" href="#" data-video="video1.mp4" data-title="Visual Stories">Watch Now →</a>
+        </div>
+      </article>
 
-    <article class="video-card tilt-card">
-      <div class="video-wrap">
-        <video controls playsinline preload="metadata" poster="project233.jpg">
-          <source src="video3.mp4" type="video/mp4">
-          Your browser does not support HTML5 video.
-        </video>
-      </div>
-      <div class="video-caption">
-        <small>Creative Content</small>
-        <h3>Digital Campaign</h3>
-        <p>Engaging visual content for campaigns and brand communication.</p>
-      </div>
-    </article>
+      <article class="video-card" data-category="editing">
+        <div class="video-wrap">
+          <div class="video-thumb" style="background-image:url('project6.jpg')"></div>
+          <span class="video-duration">00:45</span>
+          <button class="video-play" type="button" data-video="video2.mp4" data-title="Social Media Video"></button>
+        </div>
+        <div class="video-info">
+          <div class="video-meta">Video Editing</div>
+          <h4>Social Media Video</h4>
+          <div class="video-year">2024</div>
+          <a class="video-watch" href="#" data-video="video2.mp4" data-title="Social Media Video">Watch Now →</a>
+        </div>
+      </article>
 
-    <article class="video-card tilt-card">
-      <div class="video-wrap">
-        <video controls playsinline preload="metadata" poster="project244.jpg">
-          <source src="video4.mp4" type="video/mp4">
-          Your browser does not support HTML5 video.
-        </video>
-      </div>
-      <div class="video-caption">
-        <small>Motion Design</small>
-        <h3>Creative Motion</h3>
-        <p>Motion graphics and visual animation created for digital content.</p>
-      </div>
-    </article>
+      <article class="video-card" data-category="social">
+        <div class="video-wrap">
+          <div class="video-thumb" style="background-image:url('project4.jpg')"></div>
+          <span class="video-duration">00:22</span>
+          <button class="video-play" type="button" data-video="video3.mp4" data-title="Digital Campaign"></button>
+        </div>
+        <div class="video-info">
+          <div class="video-meta">Social Media</div>
+          <h4>Digital Campaign</h4>
+          <div class="video-year">2024</div>
+          <a class="video-watch" href="#" data-video="video3.mp4" data-title="Digital Campaign">Watch Now →</a>
+        </div>
+      </article>
 
-    <article class="video-card tilt-card">
-      <div class="video-wrap">
-        <video controls playsinline preload="metadata" poster="project255.jpg">
-          <source src="video5.mp4" type="video/mp4">
-          Your browser does not support HTML5 video.
-        </video>
-      </div>
-      <div class="video-caption">
-        <small>Video Editing</small>
-        <h3>Brand Video</h3>
-        <p>Polished video for branding, social media and campaigns.</p>
-      </div>
-    </article>
+      <article class="video-card" data-category="editing">
+        <div class="video-wrap">
+          <div class="video-thumb" style="background-image:url('project5.jpg')"></div>
+          <span class="video-duration">00:33</span>
+          <button class="video-play" type="button" data-video="video4.mp4" data-title="Creative Motion"></button>
+        </div>
+        <div class="video-info">
+          <div class="video-meta">Video Editing</div>
+          <h4>Creative Motion</h4>
+          <div class="video-year">2024</div>
+          <a class="video-watch" href="#" data-video="video4.mp4" data-title="Creative Motion">Watch Now →</a>
+        </div>
+      </article>
 
+      <article class="video-card" data-category="branding">
+        <div class="video-wrap">
+          <div class="video-thumb" style="background-image:url('project6.jpg')"></div>
+          <span class="video-duration">00:16</span>
+          <button class="video-play" type="button" data-video="video5.mp4" data-title="Brand Video"></button>
+        </div>
+        <div class="video-info">
+          <div class="video-meta">Branding</div>
+          <h4>Brand Video</h4>
+          <div class="video-year">2024</div>
+          <a class="video-watch" href="#" data-video="video5.mp4" data-title="Brand Video">Watch Now →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="video-bottom">
+    <div>
+      <strong>Have a project in mind?</strong>
+      <span>Let’s create something amazing together.</span>
+    </div>
+    <a href="#contact">LET’S WORK TOGETHER &nbsp; →</a>
   </div>
 </section>
+
+<div class="video-modal" id="videoModal" aria-hidden="true">
+  <div class="video-modal-inner">
+    <div class="video-modal-head">
+      <span id="videoModalTitle">Video Preview</span>
+      <button class="video-modal-close" type="button" aria-label="Close video">×</button>
+    </div>
+    <video id="modalVideo" controls playsinline></video>
+  </div>
+</div>
 
 <!-- GALLERY -->
 <section class="gallery-section" id="gallery">
@@ -648,9 +1050,9 @@ footer{
     <div class="gallery-title-row">
       <div>
         <p class="kicker">Myself</p>
-        <h2>UAE Adobe/Ai Programmer.</h2>
+        <h2>UAE Adobe/Ai Master Programer.</h2>
       </div>
-      <p class="gallery-note">Major: Graphic & multimedia.<br>Relevant Bachelors (Visualizer).</p>
+      <p class="gallery-note">Major: Graphic & multimedia.<br>Relevant Bachelors.</p>
     </div>
   </div>
 
@@ -697,11 +1099,11 @@ footer{
 
   <div class="facebook-note">
     <span>Connect via Facebook: </span>
-    <a class="facebook-link" href="https://www.facebook.com/creativedesigninfo1" target="_blank" rel="noopener noreferrer">Farhan Tanvir</a>
+    <a class="facebook-link" href="https://www.facebook.com/ftanvir7/" target="_blank" rel="noopener noreferrer">Farhan Tanvir</a>
   </div>
 
   <div class="social-links">
-    <a href="https://www.facebook.com/ftanvir7/" target="_blank" rel="noopener noreferrer">Facebook</a>
+    <a href="https://www.facebook.com/creativedesigninfo1" target="_blank" rel="noopener noreferrer">Facebook</a>
     <a href="https://www.behance.net/tausifahmed8" target="_blank" rel="noopener noreferrer">Behance</a>
     <a href="https://www.linkedin.com/in/farhan-tanvir-97a026231/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="https://www.instagram.com/ftanvir3560/" target="_blank" rel="noopener noreferrer">Instagram</a>
@@ -873,5 +1275,65 @@ document.getElementById("projectModal").addEventListener("click",e=>{
 addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
 </script>
 
+<script>
+
+/* Modern Video Portfolio interactions */
+(() => {
+  const modal = document.getElementById('videoModal');
+  const modalVideo = document.getElementById('modalVideo');
+  const modalTitle = document.getElementById('videoModalTitle');
+
+  function openVideo(src, title) {
+    if (!modal || !modalVideo) return;
+    modalTitle.textContent = title || 'Video Preview';
+    modalVideo.src = src;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    modalVideo.play().catch(() => {});
+  }
+
+  function closeVideo() {
+    if (!modal || !modalVideo) return;
+    modalVideo.pause();
+    modalVideo.removeAttribute('src');
+    modalVideo.load();
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-video]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      const src = el.getAttribute('data-video');
+      const title = el.getAttribute('data-title') || 'Video Preview';
+      if (src) openVideo(src, title);
+    });
+  });
+
+  document.querySelectorAll('.video-filter').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.video-filter').forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+      const filter = button.dataset.filter;
+
+      document.querySelectorAll('.video-card').forEach(card => {
+        const category = card.dataset.category;
+        card.classList.toggle('hidden', filter !== 'all' && category !== filter);
+      });
+    });
+  });
+
+  document.querySelector('.video-modal-close')?.addEventListener('click', closeVideo);
+  modal?.addEventListener('click', e => {
+    if (e.target === modal) closeVideo();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal?.classList.contains('open')) closeVideo();
+  });
+})();
+
+</script>
 </body>
 </html>
