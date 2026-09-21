@@ -29,6 +29,29 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
 @media(max-width:900px){.cursor-dot,.cursor-ring{display:none}.hero{min-height:auto;display:flex;flex-direction:column;padding:65px 25px 110px;align-items:stretch}.hero-copy{padding:0}.hero h1{font-size:clamp(48px,11vw,76px)}.hero-portrait{min-height:470px;margin-top:35px}.availability{left:25px;bottom:125px}.stats{right:25px;width:calc(100% - 50px)}.about{grid-template-columns:1fr;gap:35px}.skills-grid{grid-template-columns:repeat(2,1fr)}.services{grid-template-columns:1fr 1fr}.editorial-grid{grid-template-columns:1fr 1fr}.project-large{grid-column:1/-1;grid-row:auto}.project-wide{grid-column:1/-1;width:100%}.video-top{display:block}.video-intro{margin-top:20px}.gallery-title-row{align-items:flex-start}.gallery-note{text-align:left}.modal-content{grid-template-columns:1fr}.modal-image{height:340px;min-height:340px}.modal-text{padding:35px 25px}footer{padding:25px;flex-direction:column;gap:8px}}
 @media(max-width:600px){nav{height:68px;padding:0 18px}.links{display:none}.logo{font-size:20px}.start{font-size:10px;padding:9px 12px}.hero{padding:45px 20px 100px}.hero h1{font-size:47px}.hero-sub{font-size:14px}.hero-portrait{min-height:390px;border-radius:24px}.availability{left:20px;bottom:113px;font-size:10px}.stats{right:20px;width:calc(100% - 40px);min-height:92px}.stat strong{font-size:23px}section{padding:65px 20px}h2{font-size:44px}.about-text{font-size:16px}.skills-grid,.services{grid-template-columns:1fr}.skill{min-height:120px}.service{min-height:260px}.icon{margin-bottom:50px}.work-heading{align-items:flex-start}.work-count{display:none}.editorial-grid{display:flex;flex-direction:column;gap:38px}.project-wide{width:100%;margin:0}.project-large .project-image,.project-small .project-image,.project-wide .project-image,.project-medium .project-image{aspect-ratio:1.12/1}.video-side{grid-template-columns:1fr}.video-feature,.video-feature .video-wrap{min-height:300px}.video-feature-copy h3{font-size:32px}.video-bottom{display:block}.video-bottom a{display:inline-flex;margin-top:13px}.gallery-inner{padding:0 20px}.gallery-item{width:225px;height:160px;flex-basis:225px}.gallery-marquee:before,.gallery-marquee:after{width:55px}.gallery-track{animation-duration:27s}.contact h2{font-size:42px}.social-links{gap:16px}.modal-details{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.gallery-track{animation:none}*,*:before,*:after{transition:none!important;animation:none!important}}
+
+/* Supabase slide gallery */
+#art-gallery{position:relative;overflow:hidden}
+.sg-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px}
+.sg-head h2{font-size:clamp(32px,5vw,58px);margin:8px 0}
+.sg-shell{position:relative;border:1px solid rgba(255,255,255,.12);border-radius:24px;overflow:hidden;background:rgba(255,255,255,.025)}
+.sg-stage{height:clamp(260px,52vw,620px);display:flex;align-items:center;justify-content:center;background:#08090d}
+.sg-stage img{width:100%;height:100%;object-fit:contain}
+.sg-arrow{position:absolute;top:50%;transform:translateY(-50%);border:1px solid #ffffff35;background:#08090dcc;color:white;width:46px;height:46px;border-radius:50%;font-size:24px;cursor:pointer;z-index:2}
+.sg-prev{left:16px}.sg-next{right:16px}
+.sg-caption{text-align:center;padding:13px 16px;color:#bfc3cf}
+.sg-thumbs{display:flex;gap:10px;overflow-x:auto;padding:12px 2px}
+.sg-thumb{width:88px;height:68px;flex:0 0 auto;object-fit:cover;border-radius:10px;opacity:.58;cursor:pointer;border:2px solid transparent}
+.sg-thumb.active{opacity:1;border-color:#00eaff}
+.sg-admin{margin-top:28px;padding:20px;border:1px solid #ffffff20;border-radius:18px;background:#ffffff05}
+.sg-admin h3{margin:0 0 14px}
+.sg-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sg-controls input{max-width:100%;padding:11px;border-radius:9px;background:#101116;color:white;border:1px solid #ffffff30}
+.sg-btn{border:0;border-radius:9px;padding:11px 16px;cursor:pointer;font-weight:700;background:#00eaff;color:#08090d}
+.sg-status{color:#c7cbd4;font-size:14px;margin-top:12px;min-height:20px}
+.sg-hidden{display:none!important}
+@media(max-width:650px){.sg-head{display:block}.sg-admin{padding:14px}.sg-arrow{width:38px;height:38px}}
+
 </style>
 
 <style>
@@ -101,8 +124,41 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
   <div class="availability"><span class="dot"></span>Currently available for work</div>
 
   <div class="stats">
-    <div class="stat"><span>Projects Completed</span><strong>100+</strong></div>
-    <div class="stat"><span>Happy Clients</span><strong>25+</strong></div>
+    <div class="stat"><span>Projects Completed</span><strong class="count-up" data-target="100" data-suffix="+">0</strong></div>
+    <div class="stat"><span>Happy Clients</span><strong class="count-up" data-target="25" data-suffix="+">0</strong></div>
+  </div>
+</section>
+
+
+<!-- SUPABASE IMAGE SLIDER -->
+<section id="art-gallery">
+  <div class="sg-head">
+    <div><p class="kicker">More Creative Work</p><h2>SLIDE GALLERY<span style="color:#00eaff">.</span></h2>
+    <p>Explore more of my original design projects.</p></div>
+  </div>
+  <div class="sg-shell">
+    <div class="sg-stage"><img id="sgMain" alt="Gallery image" class="sg-hidden"><p id="sgEmpty">Gallery images will appear here.</p></div>
+    <button class="sg-arrow sg-prev" id="sgPrev" aria-label="Previous image">‹</button>
+    <button class="sg-arrow sg-next" id="sgNext" aria-label="Next image">›</button>
+    <div class="sg-caption" id="sgCaption"></div>
+  </div>
+  <div class="sg-thumbs" id="sgThumbs"></div>
+  <div class="sg-admin">
+    <h3>Gallery Admin</h3>
+    <div id="sgLogin" class="sg-controls">
+      <input id="sgEmail" type="email" placeholder="Admin email" autocomplete="username">
+      <input id="sgPassword" type="password" placeholder="Password" autocomplete="current-password">
+      <button id="sgLoginBtn" class="sg-btn">Log in</button>
+    </div>
+    <div id="sgUploadPanel" class="sg-hidden">
+      <p>Logged in. Select multiple JPG/JPEG files to upload at original resolution.</p>
+      <div class="sg-controls">
+        <input id="sgFiles" type="file" accept=".jpg,.jpeg,image/jpeg" multiple>
+        <button id="sgUploadBtn" class="sg-btn">Upload selected images</button>
+        <button id="sgLogoutBtn" class="sg-btn">Log out</button>
+      </div>
+    </div>
+    <p class="sg-status" id="sgStatus" aria-live="polite">Connect your Supabase project to activate gallery management.</p>
   </div>
 </section>
 
@@ -619,5 +675,103 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
 })();
 
 </script>
+
+
+<script>
+/* ===== HERO STATS COUNT-UP ===== */
+(() => {
+  const counters = document.querySelectorAll('.count-up');
+  if (!counters.length) return;
+
+  const animateCounter = counter => {
+    const target = Number(counter.dataset.target) || 0;
+    const suffix = counter.dataset.suffix || '';
+    const duration = 1600;
+    const startTime = performance.now();
+
+    const tick = now => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      // Ease-out for a smooth finish.
+      const eased = 1 - Math.pow(1 - progress, 3);
+      counter.textContent = Math.floor(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    counters.forEach(counter => observer.observe(counter));
+  } else {
+    counters.forEach(animateCounter);
+  }
+})();
+</script>
+
+
+<!-- Supabase client: replace the two placeholders after creating your Supabase project. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+  const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+  const SUPABASE_ANON_KEY = "YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY";
+  const BUCKET = "portfolio-gallery";
+  const $ = id => document.getElementById(id);
+  const main=$("sgMain"), empty=$("sgEmpty"), caption=$("sgCaption"), thumbs=$("sgThumbs"), status=$("sgStatus");
+  let client=null, items=[], index=0;
+  function say(t){status.textContent=t;}
+  function paint(){
+    thumbs.innerHTML="";
+    if(!items.length){main.classList.add("sg-hidden");empty.classList.remove("sg-hidden");caption.textContent="";return;}
+    empty.classList.add("sg-hidden");main.classList.remove("sg-hidden");
+    main.src=items[index].url;main.alt=items[index].name;caption.textContent=(index+1)+" / "+items.length+" · "+items[index].name;
+    items.forEach((it,i)=>{const im=document.createElement("img");im.src=it.url;im.alt=it.name;im.className="sg-thumb"+(i===index?" active":"");im.addEventListener("click",()=>{index=i;paint();});thumbs.appendChild(im);});
+  }
+  async function refresh(){
+    if(!client)return;
+    const {data,error}=await client.storage.from(BUCKET).list("",{limit:1000,sortBy:{column:"created_at",order:"asc"}});
+    if(error){say("Could not load images: "+error.message);return;}
+    items=(data||[]).filter(f=>/\.(jpe?g)$/i.test(f.name)).map(f=>({name:f.name,url:client.storage.from(BUCKET).getPublicUrl(f.name).data.publicUrl}));
+    index=Math.min(index,Math.max(0,items.length-1));paint();
+  }
+  $("sgPrev").onclick=()=>{if(items.length){index=(index-1+items.length)%items.length;paint();}};
+  $("sgNext").onclick=()=>{if(items.length){index=(index+1)%items.length;paint();}};
+  if(SUPABASE_URL.startsWith("YOUR_")||SUPABASE_ANON_KEY.startsWith("YOUR_")||!window.supabase){
+    say("Setup required: add your Supabase Project URL and publishable/anon key in this script.");
+    return;
+  }
+  client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+  $("sgLoginBtn").onclick=async()=>{
+    const {error}=await client.auth.signInWithPassword({email:$("sgEmail").value.trim(),password:$("sgPassword").value});
+    if(error){say("Login failed: "+error.message);return;}
+    $("sgLogin").classList.add("sg-hidden");$("sgUploadPanel").classList.remove("sg-hidden");say("Login successful.");await refresh();
+  };
+  $("sgLogoutBtn").onclick=async()=>{await client.auth.signOut();$("sgLogin").classList.remove("sg-hidden");$("sgUploadPanel").classList.add("sg-hidden");say("Logged out.");};
+  $("sgUploadBtn").onclick=async()=>{
+    const files=[...$("sgFiles").files];if(!files.length){say("Please choose one or more JPG files.");return;}
+    say("Uploading "+files.length+" image(s)...");
+    for(let i=0;i<files.length;i++){
+      const file=files[i];if(!/^image\/jpeg$/i.test(file.type)){say("Skipped non-JPEG file: "+file.name);continue;}
+      const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+      const path=Date.now()+"_"+i+"_"+safe;
+      const {error}=await client.storage.from(BUCKET).upload(path,file,{contentType:"image/jpeg",upsert:false});
+      if(error){say("Upload stopped at "+file.name+": "+error.message);return;}
+    }
+    $("sgFiles").value="";say("Upload complete.");await refresh();
+  };
+  client.auth.getSession().then(({data})=>{if(data.session){$("sgLogin").classList.add("sg-hidden");$("sgUploadPanel").classList.remove("sg-hidden");}refresh();});
+  // Auto-advance the slider; pause while the visitor hovers over it.
+  let timer=setInterval(()=>{if(items.length&&!document.querySelector("#art-gallery .sg-shell:hover")){$("sgNext").click();}},5000);
+})();
+</script>
+
 </body>
 </html>
