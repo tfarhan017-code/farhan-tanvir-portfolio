@@ -57,15 +57,23 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
 .sg-shell{position:relative;border:1px solid rgba(255,255,255,.13);border-radius:28px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));box-shadow:0 30px 80px rgba(0,0,0,.35),0 0 45px rgba(25,230,255,.05)}
 .sg-stage{height:clamp(300px,55vw,650px);position:relative;display:flex;align-items:center;justify-content:center;background:#05070b;overflow:hidden}
 .sg-stage:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,transparent 35%,rgba(0,0,0,.28) 100%);pointer-events:none;z-index:2}
-.sg-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:translateX(42px) scale(.985);filter:blur(4px);transition:opacity .55s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.16,1,.3,1),filter .55s ease}
-.sg-stage img.sg-visible{opacity:1;transform:translateX(0) scale(1);filter:blur(0)}
-.sg-stage img.sg-exit-left{opacity:0;transform:translateX(-42px) scale(.985)}
-.sg-stage img.sg-exit-right{opacity:0;transform:translateX(42px) scale(.985)}
+.sg-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:translateX(42px) scale(.985);filter:blur(4px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.16,1,.3,1),filter .7s ease;will-change:opacity,transform,filter}
+.sg-stage img.sg-visible{opacity:1;transform:translateX(0) scale(1);filter:blur(0);z-index:1}
+/* Separate cinematic outgoing layer: the old frame moves independently from the new one. */
+.sg-stage img.sg-old{opacity:1;transform:translateX(0) scale(1);filter:blur(0);z-index:2;transition:none}
+.sg-stage img.sg-old.sg-old-left{opacity:0;transform:translateX(-70px) scale(.985);filter:blur(3px);transition:opacity .62s cubic-bezier(.55,.06,.68,.19),transform .72s cubic-bezier(.55,.06,.68,.19),filter .62s ease}
+.sg-stage img.sg-old.sg-old-right{opacity:0;transform:translateX(70px) scale(.985);filter:blur(3px);transition:opacity .62s cubic-bezier(.55,.06,.68,.19),transform .72s cubic-bezier(.55,.06,.68,.19),filter .62s ease}
+.sg-stage img.sg-enter-left{opacity:0;transform:translateX(70px) scale(.975);filter:blur(5px)}
+.sg-stage img.sg-enter-left.sg-visible{opacity:1;transform:translateX(0) scale(1);filter:blur(0)}
+.sg-stage img.sg-enter-right{opacity:0;transform:translateX(-70px) scale(.975);filter:blur(5px)}
+.sg-stage img.sg-enter-right.sg-visible{opacity:1;transform:translateX(0) scale(1);filter:blur(0)}
+.sg-stage img.sg-exit-left,.sg-stage img.sg-exit-right{opacity:0}
 .sg-counter{position:absolute;left:22px;bottom:18px;z-index:6;padding:9px 13px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(5,9,14,.62);backdrop-filter:blur(14px);font:800 12px Manrope;letter-spacing:.08em;color:#fff;box-shadow:0 8px 28px rgba(0,0,0,.3)}
 #art-gallery{padding-left:0;padding-right:0}
 #art-gallery>.sg-head{padding:0 7vw}
-#art-gallery>.sg-shell{width:100vw;margin-left:calc(50% - 50vw);border-left:0;border-right:0;border-radius:0}
-#art-gallery .sg-stage{height:clamp(360px,68vw,820px);min-height:360px}
+/* Smaller premium gallery frame */
+#art-gallery>.sg-shell{width:min(92vw,1280px);margin:0 auto;border:1px solid rgba(255,255,255,.13);border-radius:24px}
+#art-gallery .sg-stage{width:100%;height:auto;aspect-ratio:16/9;min-height:280px;max-height:720px}
 #art-gallery .sg-caption{font-size:13px;letter-spacing:.02em}
 #art-gallery .sg-thumbs{display:none!important}
 .sg-arrow{width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(5,9,14,.62);color:#fff;box-shadow:0 12px 35px rgba(0,0,0,.3);backdrop-filter:blur(12px);transition:.25s;z-index:5}
@@ -85,6 +93,19 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
 #sgLogin,#sgUploadPanel{display:none!important}
 
 
+
+/* ===== HORIZONTAL SCROLLING SUPABASE GALLERY ===== */
+#art-gallery .sg-shell{width:min(92vw,1280px);margin:0 auto;position:relative;overflow:hidden}
+#art-gallery .sg-stage{width:100%;height:auto;aspect-ratio:16/9;min-height:260px;max-height:680px;display:block;position:relative;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none;background:#05070b}
+#art-gallery .sg-stage::-webkit-scrollbar{display:none}
+#art-gallery .sg-track{height:100%;display:flex;gap:18px;width:max-content;padding:0 7%;align-items:center}
+#art-gallery .sg-card{height:calc(100% - 24px);width:min(78vw,1080px);flex:0 0 auto;scroll-snap-align:center;position:relative;overflow:hidden;border-radius:18px;background:#080a0f;border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 60px rgba(0,0,0,.3);transform:scale(.94);opacity:.58;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .7s ease,filter .7s ease;filter:saturate(.78) brightness(.78)}
+#art-gallery .sg-card.is-active{transform:scale(1);opacity:1;filter:saturate(1) brightness(1)}
+#art-gallery .sg-card img{width:100%;height:100%;display:block;object-fit:cover}
+#art-gallery .sg-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 55%,rgba(0,0,0,.4));pointer-events:none}
+#art-gallery .sg-counter{left:22px;bottom:18px}
+#art-gallery .sg-arrow{z-index:8}
+@media(max-width:650px){#art-gallery .sg-track{gap:10px;padding:0 5%}#art-gallery .sg-card{width:88vw;height:calc(100% - 16px);border-radius:14px}.sg-arrow{width:40px;height:40px}}
 </style>
 
 <style>
@@ -170,7 +191,7 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
     <p>Explore more of my original design projects.</p></div>
   </div>
   <div class="sg-shell">
-    <div class="sg-stage"><img id="sgMain" alt="Gallery image" class="sg-hidden"><p id="sgEmpty">Gallery images will appear here.</p><div class="sg-counter" id="sgCounter" aria-live="polite">00 / 00</div></div>
+    <div class="sg-stage" id="sgStage"><div class="sg-track" id="sgTrack"></div><p id="sgEmpty">Gallery images will appear here.</p><div class="sg-counter" id="sgCounter" aria-live="polite">00 / 00</div></div>
     <button class="sg-arrow sg-prev" id="sgPrev" aria-label="Previous image">‹</button>
     <button class="sg-arrow sg-next" id="sgNext" aria-label="Next image">›</button>
     <div class="sg-caption" id="sgCaption"></div>
@@ -191,7 +212,7 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
         <button id="sgLogoutBtn" class="sg-btn">Log out</button>
       </div>
     </div>
-    <p class="sg-status" id="sgStatus" aria-live="polite">Admin - Farhan Tanvir.</p>
+    <p class="sg-status" id="sgStatus" aria-live="polite">Connect your Supabase project to activate gallery management.</p>
   </div>
 </section>
 
@@ -263,7 +284,7 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
       </video>
       <span class="mute-badge" aria-label="Muted autoplay video">⌁</span>
       <div class="service-video-copy">
-        <span class="mini-label">Creative Preview</span>
+        <span class="mini-label">Creative Preview · Muted</span>
         <h3>Design in Motion.</h3>
         <p>A silent, looping preview that adds movement and a premium studio feel to the services section.</p>
       </div>
@@ -769,10 +790,10 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
   const SUPABASE_ANON_KEY = "sb_publishable_jiOnexxupQjA1eZ0S2jq6w_VvjiBOhM";
   const BUCKET = "portfolio-gallery";
   const $ = id => document.getElementById(id);
-  const main=$("sgMain"), empty=$("sgEmpty"), caption=$("sgCaption"), counter=$("sgCounter"), status=$("sgStatus"), progress=$("sgProgress");
-  let client=null, items=[], index=0, autoTimer=null, progressTimer=null, isAnimating=false, touchStartX=0;
+  const stage=$("sgStage"), track=$("sgTrack"), empty=$("sgEmpty"), caption=$("sgCaption"), counter=$("sgCounter"), status=$("sgStatus"), progress=$("sgProgress");
+  let client=null, items=[], index=0, autoTimer=null, progressTimer=null, touchStartX=0, scrollTimer=null;
   const AUTO_MS=5000;
-  function say(t){status.textContent=t;}
+  function say(t){if(status)status.textContent=t;}
   function resetProgress(){
     if(!progress)return;
     progress.style.transition="none"; progress.style.width="0%";
@@ -780,78 +801,94 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
       progress.style.transition=`width ${AUTO_MS}ms linear`; progress.style.width="100%";
     }));
   }
-  function paint(direction=1, instant=false){
-    if(!items.length){main.classList.remove("sg-visible");main.classList.add("sg-hidden");empty.classList.remove("sg-hidden");caption.textContent="";if(counter)counter.textContent="00 / 00";return;}
-    empty.classList.add("sg-hidden");main.classList.remove("sg-hidden");
-    main.classList.remove("sg-visible","sg-exit-left","sg-exit-right");
-    main.src=items[index].url;main.alt=items[index].name;
-    caption.textContent=items[index].name;
-    if(counter)counter.textContent=String(index+1).padStart(2,"0")+" / "+String(items.length).padStart(2,"0");
-    if(instant){main.classList.add("sg-visible");}
-    else{
-      main.classList.add(direction<0?"sg-exit-left":"sg-exit-right");
-      requestAnimationFrame(()=>{main.classList.remove("sg-exit-left","sg-exit-right");main.classList.add("sg-visible");});
-    }
-    resetProgress();
+  function updateActive(){
+    if(!track || !items.length)return;
+    const cards=[...track.querySelectorAll('.sg-card')];
+    const center=stage.scrollLeft+stage.clientWidth/2;
+    let best=0,bestDist=Infinity;
+    cards.forEach((card,i)=>{
+      const c=card.offsetLeft+card.offsetWidth/2;
+      const d=Math.abs(c-center);
+      if(d<bestDist){bestDist=d;best=i;}
+    });
+    index=best;
+    cards.forEach((card,i)=>card.classList.toggle('is-active',i===index));
+    if(counter)counter.textContent=String(index+1).padStart(2,'0')+' / '+String(items.length).padStart(2,'0');
+    if(caption)caption.textContent=items[index]?.name||'';
   }
-  function goTo(next,direction=1){
-    if(!items.length||isAnimating)return;
-    const nextIndex=(next+items.length)%items.length;
-    if(nextIndex===index)return;
-    isAnimating=true; index=nextIndex; paint(direction);
-    setTimeout(()=>isAnimating=false,720);
+  function scrollToIndex(next, restart=true){
+    if(!items.length||!track)return;
+    index=(next+items.length)%items.length;
+    const card=track.querySelectorAll('.sg-card')[index];
+    if(card){
+      const left=card.offsetLeft-(stage.clientWidth-card.offsetWidth)/2;
+      stage.scrollTo({left:Math.max(0,left),behavior:'smooth'});
+    }
+    setTimeout(updateActive,450);
+    if(restart)restartAuto();
+  }
+  function paint(){
+    if(!items.length){track.innerHTML='';empty.classList.remove('sg-hidden');if(counter)counter.textContent='00 / 00';if(caption)caption.textContent='';return;}
+    empty.classList.add('sg-hidden');
+    track.innerHTML='';
+    items.forEach((it,i)=>{
+      const card=document.createElement('div');
+      card.className='sg-card'+(i===0?' is-active':'');
+      card.dataset.index=i;
+      const img=document.createElement('img');
+      img.src=it.url; img.alt=it.name; img.loading=i<2?'eager':'lazy';
+      card.appendChild(img); track.appendChild(card);
+      card.addEventListener('click',()=>scrollToIndex(i));
+    });
+    requestAnimationFrame(()=>{
+      if(track.querySelector('.sg-card')){
+        const first=track.querySelector('.sg-card');
+        const left=first.offsetLeft-(stage.clientWidth-first.offsetWidth)/2;
+        stage.scrollTo({left:Math.max(0,left),behavior:'auto'});
+      }
+      updateActive(); resetProgress();
+    });
   }
   function restartAuto(){
     clearInterval(autoTimer);
-    autoTimer=setInterval(()=>goTo(index+1,1),AUTO_MS);
+    autoTimer=setInterval(()=>scrollToIndex(index+1,false),AUTO_MS);
     resetProgress();
   }
   async function refresh(){
     if(!client)return;
-    const {data,error}=await client.storage.from(BUCKET).list("",{limit:1000,sortBy:{column:"created_at",order:"asc"}});
-    if(error){say("Could not load images: "+error.message);return;}
+    const {data,error}=await client.storage.from(BUCKET).list('',{limit:1000,sortBy:{column:'created_at',order:'asc'}});
+    if(error){say('Could not load images: '+error.message);return;}
     items=(data||[]).filter(f=>/\.(jpe?g)$/i.test(f.name)).map(f=>({name:f.name,url:client.storage.from(BUCKET).getPublicUrl(f.name).data.publicUrl}));
-    index=Math.min(index,Math.max(0,items.length-1));paint();
+    index=Math.min(index,Math.max(0,items.length-1)); paint(); restartAuto();
   }
-  $("sgPrev").onclick=()=>goTo(index-1,-1);
-  $("sgNext").onclick=()=>goTo(index+1,1);
-  const stage=$(".sg-stage");
-  stage?.addEventListener("pointerdown",e=>{touchStartX=e.clientX;});
-  stage?.addEventListener("pointerup",e=>{
-    const dx=e.clientX-touchStartX;
-    if(Math.abs(dx)>45)goTo(index+(dx<0?1:-1),dx<0?1:-1);
-  });
-  stage?.addEventListener("mouseenter",()=>{clearInterval(autoTimer);if(progress)progress.style.width=getComputedStyle(progress).width;});
-  stage?.addEventListener("mouseleave",restartAuto);
-  stage?.addEventListener("touchstart",e=>{touchStartX=e.changedTouches[0].clientX;},{passive:true});
-  stage?.addEventListener("touchend",e=>{
-    const dx=e.changedTouches[0].clientX-touchStartX;
-    if(Math.abs(dx)>45)goTo(index+(dx<0?1:-1),dx<0?1:-1);
-  },{passive:true});
-  if(SUPABASE_URL.startsWith("YOUR_")||SUPABASE_ANON_KEY.startsWith("YOUR_")||!window.supabase){
-    say("Setup required: add your Supabase Project URL and publishable/anon key in this script.");
-    return;
-  }
+  $("sgPrev").onclick=()=>scrollToIndex(index-1);
+  $("sgNext").onclick=()=>scrollToIndex(index+1);
+  stage?.addEventListener('scroll',()=>{clearTimeout(scrollTimer);scrollTimer=setTimeout(updateActive,80);},{passive:true});
+  stage?.addEventListener('mouseenter',()=>clearInterval(autoTimer));
+  stage?.addEventListener('mouseleave',restartAuto);
+  stage?.addEventListener('pointerdown',e=>{touchStartX=e.clientX;clearInterval(autoTimer);});
+  stage?.addEventListener('pointerup',e=>{const dx=e.clientX-touchStartX;if(Math.abs(dx)>45)scrollToIndex(index+(dx<0?1:-1));else restartAuto();});
+  if(SUPABASE_URL.startsWith('YOUR_')||SUPABASE_ANON_KEY.startsWith('YOUR_')||!window.supabase){say('Setup required: add your Supabase Project URL and publishable/anon key in this script.');return;}
   client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
   $("sgLoginBtn").onclick=async()=>{
     const {error}=await client.auth.signInWithPassword({email:$("sgEmail").value.trim(),password:$("sgPassword").value});
-    if(error){say("Login failed: "+error.message);return;}
-    $("sgLogin").classList.add("sg-hidden");$("sgUploadPanel").classList.remove("sg-hidden");say("Login successful.");await refresh();
+    if(error){say('Login failed: '+error.message);return;}
+    $("sgLogin").classList.add('sg-hidden');$("sgUploadPanel").classList.remove('sg-hidden');say('Login successful.');await refresh();
   };
-  $("sgLogoutBtn").onclick=async()=>{await client.auth.signOut();$("sgLogin").classList.remove("sg-hidden");$("sgUploadPanel").classList.add("sg-hidden");say("Logged out.");};
+  $("sgLogoutBtn").onclick=async()=>{await client.auth.signOut();$("sgLogin").classList.remove('sg-hidden');$("sgUploadPanel").classList.add('sg-hidden');say('Logged out.');};
   $("sgUploadBtn").onclick=async()=>{
-    const files=[...$("sgFiles").files];if(!files.length){say("Please choose one or more JPG files.");return;}
-    say("Uploading "+files.length+" image(s)...");
+    const files=[...$("sgFiles").files];if(!files.length){say('Please choose one or more JPG files.');return;}
+    say('Uploading '+files.length+' image(s)...');
     for(let i=0;i<files.length;i++){
-      const file=files[i];if(!/^image\/jpeg$/i.test(file.type)){say("Skipped non-JPEG file: "+file.name);continue;}
-      const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-      const path=Date.now()+"_"+i+"_"+safe;
-      const {error}=await client.storage.from(BUCKET).upload(path,file,{contentType:"image/jpeg",upsert:false});
-      if(error){say("Upload stopped at "+file.name+": "+error.message);return;}
+      const file=files[i];if(!/^image\/jpeg$/i.test(file.type)){say('Skipped non-JPEG file: '+file.name);continue;}
+      const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      const path=Date.now()+'_'+i+'_'+safe;
+      const {error}=await client.storage.from(BUCKET).upload(path,file,{contentType:'image/jpeg',upsert:false});
+      if(error){say('Upload stopped at '+file.name+': '+error.message);return;}
     }
-    $("sgFiles").value="";say("Upload complete.");await refresh();
+    $("sgFiles").value='';say('Upload complete.');await refresh();
   };
-  client.auth.getSession().then(({data})=>{if(data.session){$("sgLogin").classList.add("sg-hidden");$("sgUploadPanel").classList.remove("sg-hidden");}refresh();});
+  client.auth.getSession().then(({data})=>{if(data.session){$("sgLogin").classList.add('sg-hidden');$("sgUploadPanel").classList.remove('sg-hidden');}refresh();});
   restartAuto();
 })();
 </script>
