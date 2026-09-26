@@ -3,7 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farhan Tanvir | Graphic Designer & Video Editor</title>
+<title>Farhan Tanvir | Graphic Designer, Video Editor & Motion Graphics Artist</title>
+<meta name="description" content="Explore Farhan Tanvir’s portfolio of graphic design, video editing, motion graphics, social media creatives, branding and digital campaigns. Based in Dhaka, Bangladesh; available for creative projects.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="author" content="Farhan Tanvir">
+<meta name="theme-color" content="#06080d">
+<link rel="canonical" href="https://tfarhan017-code.github.io/farhan-tanvir-portfolio/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Farhan Tanvir Portfolio">
+<meta property="og:title" content="Farhan Tanvir | Graphic Designer & Video Editor">
+<meta property="og:description" content="Graphic design, video editing, motion graphics and creative visual storytelling by Farhan Tanvir.">
+<meta property="og:url" content="https://tfarhan017-code.github.io/farhan-tanvir-portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Farhan Tanvir | Graphic Designer & Video Editor">
+<meta name="twitter:description" content="Explore graphic design, motion graphics and video editing projects by Farhan Tanvir.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Farhan Tanvir",
+  "url": "https://tfarhan017-code.github.io/farhan-tanvir-portfolio/",
+  "jobTitle": ["Graphic Designer", "Video Editor", "Motion Graphics Artist"],
+  "knowsAbout": ["Graphic Design", "Video Editing", "Motion Graphics", "Social Media Design", "Branding", "Digital Campaigns"],
+  "address": {"@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD"}
+}
+</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
 :root{--bg:#06080d;--surface:#0b1018;--surface2:#0f1622;--text:#f4f8ff;--muted:#8b97a8;--cyan:#19e6ff;--violet:#8b5cf6;--pink:#ff3da8;--line:rgba(255,255,255,.09)}
@@ -74,6 +99,71 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
 .sg-progress{height:2px;position:absolute;left:0;right:0;bottom:0;z-index:6;background:rgba(255,255,255,.08);overflow:hidden}
 .sg-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));box-shadow:0 0 14px rgba(25,230,255,.55)}
 @media(max-width:650px){.sg-track{gap:14px;padding:14px 6vw}.sg-track .sg-slide{min-width:88vw;border-radius:16px}.sg-arrow{width:40px;height:40px}.sg-caption{font-size:9px;bottom:11px}.sg-counter{left:12px;bottom:12px}}
+
+/* Premium expandable 3D video library */
+.video-library-toggle{display:flex;align-items:center;justify-content:space-between;gap:20px;width:min(100%,360px);margin:28px 0 0;padding:17px 20px;border:1px solid rgba(25,230,255,.45);border-radius:14px;background:linear-gradient(120deg,rgba(25,230,255,.12),rgba(139,92,246,.10));color:#eafcff;font:800 12px Manrope,sans-serif;letter-spacing:.12em;cursor:pointer;transition:transform .25s,border-color .25s,background .25s;box-shadow:0 12px 35px rgba(0,0,0,.2)}
+.video-library-toggle:hover{transform:translateY(-3px);border-color:var(--cyan);background:linear-gradient(120deg,rgba(25,230,255,.2),rgba(139,92,246,.16))}
+.video-library-toggle .toggle-icon{font-size:24px;line-height:1;color:var(--cyan);transition:transform .3s}
+.video-library-toggle[aria-expanded="true"] .toggle-icon{transform:rotate(45deg)}
+.video-library{margin-top:30px;perspective:1400px;animation:videoLibraryIn .45s ease both}
+.video-library[hidden]{display:none!important}
+@keyframes videoLibraryIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.video-library .video-layout{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.video-library .video-feature,.video-library .video-card{min-width:0;min-height:0;border:1px solid rgba(255,255,255,.12);border-radius:20px;overflow:hidden;background:linear-gradient(145deg,#111a26,#080c13);box-shadow:0 20px 45px rgba(0,0,0,.3);transform-style:preserve-3d;transition:transform .35s ease,border-color .35s,box-shadow .35s}
+.video-library .video-feature{min-height:0}
+.video-library .video-feature .video-wrap{height:auto;min-height:0;aspect-ratio:16/10}
+.video-library .video-feature .video-wrap video{height:100%;min-height:0;object-fit:cover}
+.video-library .video-side{display:contents}
+.video-library .video-card:hover,.video-library .video-feature:hover{transform:translateY(-9px) rotateX(3deg) rotateY(-3deg) translateZ(12px);border-color:rgba(25,230,255,.55);box-shadow:0 30px 55px rgba(0,0,0,.42),0 0 24px rgba(25,230,255,.09)}
+.video-library .video-card .video-wrap{aspect-ratio:16/10}
+.video-library .video-card .video-info{min-height:118px}
+.video-library .video-overlay{padding:18px}
+.video-library .video-feature-copy h3{font-size:clamp(22px,2.3vw,32px)}
+.video-library .video-play{width:52px;height:52px}
+@media(max-width:900px){.video-library .video-layout{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.video-library .video-layout{grid-template-columns:1fr;gap:15px}.video-library .video-feature .video-wrap{aspect-ratio:16/9}.video-library-toggle{width:100%}.video-library .video-card:hover,.video-library .video-feature:hover{transform:translateY(-4px)}}
+@media(prefers-reduced-motion:reduce){.video-library,.video-library-toggle,.video-library .video-card,.video-library .video-feature{animation:none!important;transition:none!important}}
+
+/* Premium centered Video Portfolio presentation */
+.video-section{position:relative;isolation:isolate;}
+.video-section .video-top{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:18px!important;text-align:center!important;margin:0 auto 34px!important;max-width:1120px!important;}
+.video-section .video-top>div:first-child{display:flex;flex-direction:column;align-items:center;}
+.video-section .video-kicker{display:inline-flex;align-items:center;justify-content:center;padding:8px 15px;margin:0 auto 16px;border:1px solid rgba(25,230,255,.32);border-radius:999px;background:rgba(25,230,255,.07);color:#8ff4ff;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;box-shadow:inset 0 0 18px rgba(25,230,255,.04),0 8px 28px rgba(0,0,0,.16);}
+.video-section .video-heading{margin:0!important;text-align:center!important;font-size:clamp(36px,6vw,76px)!important;line-height:1.04!important;letter-spacing:-.055em!important;font-weight:900!important;text-wrap:balance;text-shadow:0 8px 35px rgba(0,0,0,.28);}
+.video-section .video-heading:after{content:"";display:block;width:86px;height:3px;margin:20px auto 0;border-radius:99px;background:linear-gradient(90deg,#19e6ff,#a855f7,#ff2d9a);box-shadow:0 0 22px rgba(25,230,255,.28);}
+.video-section .video-intro{max-width:620px!important;margin:0 auto!important;text-align:center!important;color:rgba(230,239,249,.72);font-size:15px;line-height:1.9;}
+.video-section .video-intro .video-cta{display:inline-flex;align-items:center;justify-content:center;margin:20px auto 0;padding:12px 21px;border:1px solid rgba(255,45,154,.45);border-radius:999px;background:linear-gradient(110deg,rgba(255,45,154,.13),rgba(139,92,246,.12));color:#fff;text-decoration:none;font-size:11px;font-weight:800;letter-spacing:.12em;transition:transform .25s,border-color .25s,box-shadow .25s;}
+.video-section .video-intro .video-cta:hover{transform:translateY(-3px);border-color:#ff2d9a;box-shadow:0 10px 30px rgba(255,45,154,.16);}
+.video-section .video-library-toggle{margin:0 auto 30px!important;min-width:280px;justify-content:center!important;position:relative;}
+.video-section .video-library-toggle .toggle-icon{position:absolute;right:19px;}
+.video-section .video-library{width:min(100%,1180px);margin:0 auto!important;}
+.video-section .video-filters{justify-content:center!important;}
+@media(max-width:600px){.video-section .video-top{margin-bottom:26px!important}.video-section .video-heading{font-size:clamp(34px,10vw,52px)!important}.video-section .video-intro{font-size:14px;padding:0 8px}.video-section .video-library-toggle{width:min(100%,360px)!important;}}
+
+</style>
+
+<style>
+/* Always-visible premium 3D auto-sliding video showcase */
+.video-3d-showcase{width:min(100%,1180px);margin:12px auto 34px;perspective:1300px;position:relative;}
+.video-3d-stage{height:clamp(230px,35vw,420px);position:relative;transform-style:preserve-3d;overflow:hidden;border-radius:24px;}
+.video-3d-slide{position:absolute;left:50%;top:50%;width:min(58%,650px);height:88%;transform-style:preserve-3d;overflow:hidden;border:1px solid rgba(25,230,255,.35);border-radius:22px;background:#070b12;box-shadow:0 24px 60px rgba(0,0,0,.45);transition:transform .8s cubic-bezier(.2,.75,.2,1),opacity .8s,filter .8s;cursor:pointer;}
+.video-3d-slide video{width:100%;height:100%;object-fit:cover;display:block;}
+.video-3d-slide:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.85));pointer-events:none;}
+.video-3d-caption{position:absolute;z-index:2;left:22px;right:18px;bottom:18px;text-align:left;color:white;text-shadow:0 2px 12px #000;}
+.video-3d-caption small{display:block;color:#7ff3ff;font-size:10px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px;}
+.video-3d-caption strong{font:800 clamp(16px,2.3vw,27px) Manrope,sans-serif;}
+.video-3d-slide.is-active{transform:translate(-50%,-50%) translateZ(100px) scale(1);opacity:1;z-index:5;filter:none;}
+.video-3d-slide.is-prev{transform:translate(-125%,-50%) rotateY(28deg) scale(.78) translateZ(-100px);opacity:.72;z-index:3;filter:saturate(.7);}
+.video-3d-slide.is-next{transform:translate(25%,-50%) rotateY(-28deg) scale(.78) translateZ(-100px);opacity:.72;z-index:3;filter:saturate(.7);}
+.video-3d-slide.is-hidden{transform:translate(-50%,-50%) scale(.55) translateZ(-280px);opacity:0;pointer-events:none;z-index:1;}
+.video-3d-controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:14px;}
+.video-3d-controls button{width:42px;height:42px;border-radius:50%;border:1px solid rgba(25,230,255,.45);background:rgba(25,230,255,.08);color:#8ff4ff;font-size:20px;cursor:pointer;transition:.25s;}
+.video-3d-controls button:hover{background:rgba(25,230,255,.2);transform:scale(1.06)}
+.video-3d-dots{display:flex;gap:7px;align-items:center;}
+.video-3d-dots button{width:7px;height:7px;padding:0;border:0;background:#526174;border-radius:50%;}
+.video-3d-dots button.active{width:24px;border-radius:9px;background:linear-gradient(90deg,#19e6ff,#ff2d9a);}
+@media(max-width:650px){.video-3d-stage{height:270px}.video-3d-slide{width:76%;height:82%}.video-3d-slide.is-prev{transform:translate(-115%,-50%) rotateY(22deg) scale(.72) translateZ(-100px)}.video-3d-slide.is-next{transform:translate(15%,-50%) rotateY(-22deg) scale(.72) translateZ(-100px)}.video-3d-caption{left:14px;bottom:13px}}
+@media(prefers-reduced-motion:reduce){.video-3d-slide,.video-3d-controls button{transition:none!important}}
 </style>
 
 <style>
@@ -126,82 +216,9 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
 .fp-dots button.active{width:22px;border-radius:10px;background:var(--cyan);box-shadow:0 0 12px rgba(25,230,255,.55)}
 @keyframes fpShine{0%,45%{transform:translateX(-120%)}70%,100%{transform:translateX(120%)}}
 
-/* ===== NEON MOTION GALLERY FRAME ===== */
-.sg-shell{
-  border-color:rgba(25,230,255,.55)!important;
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.35),
-    0 0 18px rgba(25,230,255,.24),
-    0 0 45px rgba(139,92,246,.12),
-    inset 0 0 24px rgba(25,230,255,.035)!important;
-}
-.sg-shell:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  padding:1.5px;
-  border-radius:inherit;
-  background:
-    linear-gradient(
-      115deg,
-      rgba(25,230,255,.12) 0%,
-      rgba(25,230,255,.95) 18%,
-      rgba(139,92,246,.9) 34%,
-      rgba(255,61,168,.9) 50%,
-      rgba(25,230,255,.95) 66%,
-      rgba(139,92,246,.75) 82%,
-      rgba(25,230,255,.12) 100%
-    );
-  background-size:280% 280%;
-  background-position:0% 50%;
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  mask-composite:exclude;
-  pointer-events:none;
-  z-index:7;
-  animation:sgNeonBorderMove 4.2s linear infinite;
-}
-.sg-shell:after{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:inherit;
-  border:2px solid transparent;
-  background:linear-gradient(115deg,rgba(25,230,255,.0),rgba(25,230,255,.42),rgba(139,92,246,.22),rgba(255,61,168,.38),rgba(25,230,255,.0)) border-box;
-  background-size:260% 260%;
-  background-position:0% 50%;
-  -webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-  mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);
-  mask-composite:exclude;
-  pointer-events:none;
-  z-index:6;
-  filter:blur(5px);
-  opacity:.65;
-  animation:sgNeonGlowMove 4.2s linear infinite;
-}
-@keyframes sgNeonBorderMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-@keyframes sgNeonGlowMove{
-  0%{background-position:0% 50%;opacity:.45}
-  50%{background-position:100% 50%;opacity:.78}
-  100%{background-position:0% 50%;opacity:.45}
-}
-@media(max-width:900px){
-  .sg-shell:before{animation-duration:4.8s}
-  .sg-shell:after{animation-duration:4.8s}
-}
-@media(max-width:600px){
-  .sg-shell:before{padding:1.2px;animation-duration:5.2s}
-  .sg-shell:after{filter:blur(4px);opacity:.55;animation-duration:5.2s}
-}
-@media(prefers-reduced-motion:reduce){
-  .sg-shell:before,.sg-shell:after{animation:none}
-}
+/* ===== STATIC NEON GALLERY FRAME ===== */
+.sg-shell{border-color:rgba(25,230,255,.62)!important;box-shadow:0 30px 80px rgba(0,0,0,.35),0 0 18px rgba(25,230,255,.28),0 0 45px rgba(139,92,246,.12),inset 0 0 24px rgba(25,230,255,.035)!important}
+.sg-shell:before{content:"";position:absolute;inset:0;border:1px solid transparent;border-radius:inherit;background:linear-gradient(135deg,rgba(25,230,255,.85),rgba(139,92,246,.5),rgba(255,61,168,.65),rgba(25,230,255,.85)) border-box;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;-webkit-mask-composite:xor;pointer-events:none;z-index:7}
 
 /* ===== NEON BACK TO TOP ===== */
 #backToTop{position:fixed;right:24px;bottom:24px;width:52px;height:52px;border:1px solid rgba(25,230,255,.7);border-radius:50%;background:rgba(5,10,16,.88);color:var(--cyan);font-size:23px;font-weight:900;display:grid;place-items:center;cursor:pointer;z-index:10001;opacity:0;visibility:hidden;transform:translateY(15px);transition:opacity .3s,visibility .3s,transform .3s,box-shadow .3s;box-shadow:0 0 12px rgba(25,230,255,.3),0 0 28px rgba(25,230,255,.12),inset 0 0 12px rgba(25,230,255,.06);backdrop-filter:blur(12px)}
@@ -234,6 +251,20 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
 }
 
 </style>
+
+<style>
+/* Video 3D slider frame fix: prevent the stage from cutting card corners/edges */
+.video-3d-showcase{overflow:visible;isolation:isolate;padding:8px 0 4px;}
+.video-3d-stage{overflow:visible!important;border-radius:0;contain:layout style;}
+.video-3d-slide{box-sizing:border-box;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+.video-3d-slide video{border-radius:inherit;object-fit:contain;background:#05080d;}
+@media(max-width:650px){
+  .video-3d-stage{height:290px;}
+  .video-3d-slide{border-radius:17px;}
+  .video-3d-slide video{object-fit:contain;}
+}
+</style>
+
 </head>
 <body>
 
@@ -457,6 +488,22 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
     </div>
   </div>
 
+  <div class="video-3d-showcase" aria-label="Auto-sliding video portfolio preview">
+    <div class="video-3d-stage" id="video3dStage">
+      <button class="video-3d-slide is-active" type="button" data-video="video2020.mp4" data-title="Showreel 2024" aria-label="Play Showreel 2024"><video src="video2020.mp4" poster="project200.jpg" muted playsinline preload="metadata"></video><span class="video-3d-caption"><small>Featured Showreel</small><strong>SHOWREEL 2024</strong></span></button>
+      <button class="video-3d-slide is-next" type="button" data-video="video1.mp4" data-title="Visual Stories" aria-label="Play Visual Stories"><video src="video1.mp4" poster="project211.jpg" muted playsinline preload="metadata"></video><span class="video-3d-caption"><small>Motion Graphics</small><strong>Visual Stories</strong></span></button>
+      <button class="video-3d-slide is-hidden" type="button" data-video="video2.mp4" data-title="Social Media Video" aria-label="Play Social Media Video"><video src="video2.mp4" poster="project222.jpg" muted playsinline preload="metadata"></video><span class="video-3d-caption"><small>Video Editing</small><strong>Social Media Video</strong></span></button>
+      <button class="video-3d-slide is-hidden" type="button" data-video="video3.mp4" data-title="Digital Campaign" aria-label="Play Digital Campaign"><video src="video3.mp4" poster="project233.jpg" muted playsinline preload="metadata"></video><span class="video-3d-caption"><small>Social Media</small><strong>Digital Campaign</strong></span></button>
+      <button class="video-3d-slide is-hidden" type="button" data-video="video4.mp4" data-title="Creative Motion" aria-label="Play Creative Motion"><video src="video4.mp4" poster="project244.jpg" muted playsinline preload="metadata"></video><span class="video-3d-caption"><small>Video Editing</small><strong>Creative Motion</strong></span></button>
+      <button class="video-3d-slide is-prev" type="button" data-video="video5.mp4" data-title="Brand Video" aria-label="Play Brand Video"><video src="video5.mp4" poster="project255.jpg" muted playsinline preload="metadata"></video><span class="video-3d-caption"><small>Branding</small><strong>Brand Video</strong></span></button>
+    </div>
+    <div class="video-3d-controls"><button type="button" id="video3dPrev" aria-label="Previous video">‹</button><div class="video-3d-dots" id="video3dDots" aria-label="Choose video"></div><button type="button" id="video3dNext" aria-label="Next video">›</button></div>
+  </div>
+
+  <button class="video-library-toggle" id="videoLibraryToggle" type="button" aria-expanded="false" aria-controls="videoLibrary">
+    <span class="toggle-label">EXPLORE ALL VIDEOS</span><span class="toggle-icon" aria-hidden="true">＋</span>
+  </button>
+  <div class="video-library" id="videoLibrary" hidden>
   <div class="video-filters" aria-label="Video categories">
     <button class="video-filter active" data-filter="all">ALL</button>
     <button class="video-filter" data-filter="showreel">SHOWREEL</button>
@@ -555,6 +602,7 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
       </article>
     </div>
   </div>
+  </div><!-- /video-library -->
 
   <div class="video-bottom">
     <div>
@@ -581,9 +629,9 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
     <div class="gallery-title-row">
       <div>
         <p class="kicker">Myself</p>
-        <h2>Adobe User.</h2>
+        <h2>UAE Adobe/Ai Programmer.</h2>
       </div>
-      <p class="gallery-note">Graphic & Multimedia.<br>Over 6 Years of Experience.</p>
+      <p class="gallery-note">Major: Graphic & multimedia.<br>Relevant Bachelors.</p>
     </div>
   </div>
 
@@ -807,6 +855,22 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
 </script>
 
 <script>
+
+
+/* 3D video carousel: rotates automatically; videos are muted preview loops */
+(() => {
+ const stage=document.getElementById('video3dStage'); if(!stage) return;
+ const slides=[...stage.querySelectorAll('.video-3d-slide')];
+ const dotsWrap=document.getElementById('video3dDots'); let active=0; let timer;
+ const dots=slides.map((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Show video '+(i+1));b.addEventListener('click',()=>{show(i);restart();});dotsWrap.appendChild(b);return b;});
+ function show(index){active=(index+slides.length)%slides.length;slides.forEach((slide,i)=>{slide.classList.remove('is-active','is-prev','is-next','is-hidden');let d=(i-active+slides.length)%slides.length;slide.classList.add(d===0?'is-active':d===1?'is-next':d===slides.length-1?'is-prev':'is-hidden');const v=slide.querySelector('video');if(v){if(d===0){v.play().catch(()=>{});}else{v.pause();}}dots[i].classList.toggle('active',i===active);});}
+ function restart(){clearInterval(timer);timer=setInterval(()=>show(active+1),4500);}
+ document.getElementById('video3dPrev')?.addEventListener('click',()=>{show(active-1);restart();});
+ document.getElementById('video3dNext')?.addEventListener('click',()=>{show(active+1);restart();});
+ stage.addEventListener('mouseenter',()=>clearInterval(timer));stage.addEventListener('mouseleave',restart);
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(timer);else restart();});
+ show(0);restart();
+})();
 
 /* Modern Video Portfolio interactions */
 (() => {
@@ -1071,6 +1135,54 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
   toggle();
 })();
 </script>
+
+
+<script>
+/* Expand/collapse the complete video collection on demand */
+(() => {
+  const button = document.getElementById('videoLibraryToggle');
+  const library = document.getElementById('videoLibrary');
+  if (!button || !library) return;
+  button.addEventListener('click', () => {
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!expanded));
+    library.hidden = expanded;
+    button.querySelector('.toggle-label').textContent = expanded ? 'EXPLORE ALL VIDEOS' : 'HIDE VIDEO COLLECTION';
+    if (!expanded) library.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+})();
+</script>
+
+
+<!-- Floating WhatsApp contact button: replace 8801XXXXXXXXX with your WhatsApp number (country code, no + or spaces). -->
+<style>
+  .floating-whatsapp {
+    position: fixed;
+    left: 22px;
+    bottom: 22px;
+    z-index: 9999;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #fff;
+    background: #25D366;
+    box-shadow: 0 8px 24px rgba(0,0,0,.28), 0 0 0 5px rgba(37,211,102,.14);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .floating-whatsapp:hover {
+    transform: translateY(-4px) scale(1.06);
+    box-shadow: 0 12px 30px rgba(0,0,0,.32), 0 0 0 7px rgba(37,211,102,.18);
+  }
+  .floating-whatsapp svg { width: 31px; height: 31px; fill: currentColor; }
+  .floating-whatsapp:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+  @media (max-width: 600px) { .floating-whatsapp { left: 14px; bottom: 14px; width: 52px; height: 52px; } }
+</style>
+<a class="floating-whatsapp" href="https://wa.me/8801XXXXXXXXX" target="_blank" rel="noopener noreferrer" aria-label="Chat with me on WhatsApp" title="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.02 3C8.86 3 3.04 8.78 3.04 15.9c0 2.27.6 4.49 1.74 6.45L3 29l6.85-1.78a13.1 13.1 0 0 0 6.17 1.56h.01c7.16 0 12.98-5.79 12.98-12.9A12.8 12.8 0 0 0 16.02 3zm0 23.6h-.01a10.8 10.8 0 0 1-5.5-1.5l-.4-.24-4.07 1.06 1.09-3.94-.26-.41a10.65 10.65 0 0 1-1.65-5.67c0-5.95 4.86-10.79 10.81-10.79 2.88 0 5.59 1.12 7.63 3.16a10.7 10.7 0 0 1 3.17 7.62c0 5.95-4.86 10.79-10.81 10.79zm5.93-8.08c-.32-.16-1.9-.94-2.2-1.05-.3-.11-.51-.16-.72.16-.21.32-.83 1.05-1.02 1.26-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.84-1.59-1.88-1.78-2.2-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.99-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.08-1.11 2.63s1.14 3.05 1.3 3.26c.16.21 2.24 3.41 5.42 4.78.76.33 1.35.52 1.81.66.76.24 1.45.21 1.99.13.61-.09 1.9-.77 2.17-1.52.27-.75.27-1.39.19-1.52-.08-.13-.29-.21-.61-.37z"/></svg>
+</a>
 
 </body>
 </html>
