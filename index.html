@@ -1334,3 +1334,50 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
 
 </body>
 </html>
+
+<style>
+/* Final user-requested alignment + 3D video spacing */
+#art-gallery .sg-head{
+  display:flex;
+  justify-content:center;
+  text-align:center;
+}
+#art-gallery .sg-head > div{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+#art-gallery .sg-head .kicker{
+  margin-left:auto;
+  margin-right:auto;
+}
+#art-gallery .sg-head h2,
+#art-gallery .sg-head p{
+  text-align:center;
+}
+
+/* Keep the playing center frame unchanged; bring the two side frames inward. */
+.video-3d-slide.is-prev{
+  transform:translate(-105%,-50%) rotateY(28deg) scale(.78) translateZ(-100px);
+}
+.video-3d-slide.is-next{
+  transform:translate(5%,-50%) rotateY(-28deg) scale(.78) translateZ(-100px);
+}
+@media(max-width:900px){
+  .video-3d-slide.is-prev{
+    transform:translate(-103%,-50%) rotateY(22deg) scale(.72) translateZ(-100px);
+  }
+  .video-3d-slide.is-next{
+    transform:translate(3%,-50%) rotateY(-22deg) scale(.72) translateZ(-100px);
+  }
+}
+@media(max-width:600px){
+  .video-3d-slide.is-prev{
+    transform:translate(-101%,-50%) rotateY(18deg) scale(.68) translateZ(-70px);
+  }
+  .video-3d-slide.is-next{
+    transform:translate(1%,-50%) rotateY(-18deg) scale(.68) translateZ(-70px);
+  }
+}
+</style>
