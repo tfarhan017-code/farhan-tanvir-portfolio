@@ -29,6 +29,8 @@
   "address": {"@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD"}
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
 :root{--bg:#06080d;--surface:#0b1018;--surface2:#0f1622;--text:#f4f8ff;--muted:#8b97a8;--cyan:#19e6ff;--violet:#8b5cf6;--pink:#ff3da8;--line:rgba(255,255,255,.09)}
@@ -61,7 +63,7 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
 .sg-head h2{font-size:clamp(32px,5vw,58px);margin:8px 0}
 .sg-shell{position:relative;border:1px solid rgba(255,255,255,.12);border-radius:24px;overflow:hidden;background:rgba(255,255,255,.025)}
 .sg-stage{height:clamp(260px,52vw,620px);display:flex;align-items:center;justify-content:center;background:#08090d}
-.sg-stage img{width:100%;height:100%;object-fit:contain}
+.sg-stage img{width:100%;height:100%;object-fit:contain;content-visibility:auto} .sg-slide{contain:layout paint;will-change:transform} .sg-track{overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
 .sg-arrow{position:absolute;top:50%;transform:translateY(-50%);border:1px solid #ffffff35;background:#08090dcc;color:white;width:46px;height:46px;border-radius:50%;font-size:24px;cursor:pointer;z-index:2}
 .sg-prev{left:16px}.sg-next{right:16px}
 .sg-caption{text-align:center;padding:13px 16px;color:#bfc3cf}
@@ -139,6 +141,15 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
 .video-section .video-library{width:min(100%,1180px);margin:0 auto!important;}
 .video-section .video-filters{justify-content:center!important;}
 @media(max-width:600px){.video-section .video-top{margin-bottom:26px!important}.video-section .video-heading{font-size:clamp(34px,10vw,52px)!important}.video-section .video-intro{font-size:14px;padding:0 8px}.video-section .video-library-toggle{width:min(100%,360px)!important;}}
+
+
+
+/* Final polish: center the Featured Projects title and remove video promo strip */
+#work .work-heading{display:flex;justify-content:center;align-items:center;text-align:center;margin-bottom:55px}
+#work .work-heading>div:first-child{display:flex;flex-direction:column;align-items:center;text-align:center}
+#work .work-heading .kicker{margin-left:auto;margin-right:auto}
+#work .work-heading h2{text-align:center}
+#work .work-heading .work-count{display:none}
 
 </style>
 
@@ -604,13 +615,6 @@ section{padding:110px 7vw;background:transparent;position:relative}.kicker{font-
   </div>
   </div><!-- /video-library -->
 
-  <div class="video-bottom">
-    <div>
-      <strong>Have a project in mind?</strong>
-      <span>Let’s create something amazing together.</span>
-    </div>
-    <a href="#contact">LET’S WORK TOGETHER &nbsp; →</a>
-  </div>
 </section>
 
 <div class="video-modal" id="videoModal" aria-hidden="true">
@@ -979,26 +983,42 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
   const SUPABASE_URL = "https://aqwokfxpfbgenaghpmno.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_jiOnexxupQjA1eZ0S2jq6w_VvjiBOhM";
   const BUCKET = "portfolio-gallery";
+  const CACHE_KEY = "farhan_gallery_manifest_v2";
+  const IMAGE_WIDTH = Math.min(window.innerWidth * (window.devicePixelRatio || 1), 1400);
+  const IMAGE_QUALITY = 78;
   const $ = id => document.getElementById(id);
   const track=$("sgTrack"), empty=$("sgEmpty"), caption=$("sgCaption"), counter=$("sgCounter"), status=$("sgStatus"), progress=$("sgProgress");
   let client=null, items=[], index=0, autoTimer=null, touchStartX=0, isPointerDown=false, autoPaused=false;
   const AUTO_MS=5000;
+
   function say(t){if(status)status.textContent=t;}
   function resetProgress(){
     if(!progress)return;
     progress.style.transition="none"; progress.style.width="0%";
     requestAnimationFrame(()=>requestAnimationFrame(()=>{progress.style.transition=`width ${AUTO_MS}ms linear`;progress.style.width="100%";}));
   }
+  function optimizedUrl(name){
+    // Supabase Image Transformations: serve a much smaller responsive image instead of the original.
+    return `${SUPABASE_URL}/storage/v1/render/image/public/${BUCKET}/${encodeURIComponent(name)}?width=${Math.round(IMAGE_WIDTH)}&quality=${IMAGE_QUALITY}`;
+  }
+  function saveCache(list){try{localStorage.setItem(CACHE_KEY,JSON.stringify({time:Date.now(),items:list}));}catch(e){}}
+  function loadCache(){
+    try{const raw=localStorage.getItem(CACHE_KEY);if(!raw)return null;const c=JSON.parse(raw);return Array.isArray(c.items)&&c.items.length?c.items:null;}catch(e){return null;}
+  }
   function renderSlides(){
     track.innerHTML="";
+    const frag=document.createDocumentFragment();
     items.forEach((it,i)=>{
       const slide=document.createElement("div");
       slide.className="sg-slide"+(i===index?" is-active":"");
       slide.dataset.index=i;
       const img=document.createElement("img");
-      img.src=it.url; img.alt=it.name; img.loading=i===0?"eager":"lazy"; img.draggable=false;
-      slide.appendChild(img); track.appendChild(slide);
+      img.src=it.url; img.alt=it.name; img.decoding="async"; img.draggable=false; img.onerror=()=>{if(it.fallback && img.src!==it.fallback){img.src=it.fallback;}};
+      if(i===index){img.loading="eager";img.fetchPriority="high";}
+      else {img.loading="lazy";img.fetchPriority="low";}
+      slide.appendChild(img); frag.appendChild(slide);
     });
+    track.appendChild(frag);
     updateActive(false);
   }
   function updateActive(scroll=true){
@@ -1006,34 +1026,39 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
     slides.forEach((el,i)=>el.classList.toggle("is-active",i===index));
     if(counter)counter.textContent=items.length?String(index+1).padStart(2,"0")+" / "+String(items.length).padStart(2,"0"):"00 / 00";
     if(caption)caption.textContent=items[index]?.name||"";
-    // IMPORTANT: never use scrollIntoView() here. It can move the whole page
-    // back to the Gallery section. Only scroll the Gallery's horizontal track.
+    // Promote only the current and adjacent images; keep the rest lazy.
+    [index-1,index,index+1].forEach(i=>{if(items[i]){const img=slides[i]?.querySelector("img");if(img){img.loading="eager";img.fetchPriority=i===index?"high":"low";}}});
     if(scroll && slides[index]){
       const slide=slides[index];
-      const target=slide.offsetLeft - (track.clientWidth - slide.offsetWidth)/2;
+      const target=slide.offsetLeft-(track.clientWidth-slide.offsetWidth)/2;
       track.scrollTo({left:Math.max(0,target),behavior:"smooth"});
     }
     resetProgress();
   }
-  function goTo(next){
-    if(!items.length)return;
-    index=(next+items.length)%items.length;
-    updateActive(true);
-  }
-  function restartAuto(){
-    clearInterval(autoTimer);
-    autoTimer=setInterval(()=>{if(!autoPaused)goTo(index+1);},AUTO_MS);
-    resetProgress();
-  }
-  async function refresh(){
-    if(!client)return;
-    const {data,error}=await client.storage.from(BUCKET).list("",{limit:1000,sortBy:{column:"created_at",order:"asc"}});
-    if(error){say("Could not load images: "+error.message);return;}
-    items=(data||[]).filter(f=>/\.(jpe?g|png|webp|gif|svg)$/i.test(f.name)).map(f=>({name:f.name,url:client.storage.from(BUCKET).getPublicUrl(f.name).data.publicUrl}));
-    index=Math.min(index,Math.max(0,items.length-1));
+  function goTo(next){if(!items.length)return;index=(next+items.length)%items.length;updateActive(true);}
+  function restartAuto(){clearInterval(autoTimer);autoTimer=setInterval(()=>{if(!autoPaused)goTo(index+1);},AUTO_MS);resetProgress();}
+
+  function applyItems(list, fromCache=false){
+    items=list||[]; index=Math.min(index,Math.max(0,items.length-1));
     if(!items.length){track.innerHTML="";empty.classList.remove("sg-hidden");updateActive(false);return;}
     empty.classList.add("sg-hidden"); renderSlides(); restartAuto();
+    if(fromCache) say("Gallery ready • updating in background…");
   }
+
+  async function refresh(){
+    if(!client)return;
+    try{
+      const {data,error}=await client.storage.from(BUCKET).list("",{limit:1000,sortBy:{column:"created_at",order:"asc"}});
+      if(error){if(!items.length)say("Could not load gallery.");return;}
+      const list=(data||[])
+        .filter(f=>/\.(jpe?g|png|webp|gif|svg)$/i.test(f.name))
+        .map(f=>({name:f.name,url:optimizedUrl(f.name),fallback:client.storage.from(BUCKET).getPublicUrl(f.name).data.publicUrl}));
+      saveCache(list);
+      applyItems(list,false);
+      say("Gallery ready.");
+    }catch(e){if(!items.length)say("Gallery is temporarily unavailable.");}
+  }
+
   $("sgPrev").onclick=()=>goTo(index-1);
   $("sgNext").onclick=()=>goTo(index+1);
   track?.addEventListener("pointerdown",e=>{isPointerDown=true;touchStartX=e.clientX;autoPaused=true;track.setPointerCapture?.(e.pointerId);});
@@ -1044,16 +1069,20 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
   track?.addEventListener("scroll",()=>{
     if(!items.length||isPointerDown)return;
     const slides=[...track.querySelectorAll(".sg-slide")];
-    const center=track.scrollLeft+track.clientWidth/2;
-    let nearest=0,dist=Infinity;
-    slides.forEach((el,i)=>{const c=el.offsetLeft+el.offsetWidth/2;const d=Math.abs(c-center);if(d<dist){dist=d;nearest=i;}});
+    const center=track.scrollLeft+track.clientWidth/2; let nearest=0,dist=Infinity;
+    slides.forEach((el,i)=>{const c=el.offsetLeft+el.offsetWidth/2,d=Math.abs(c-center);if(d<dist){dist=d;nearest=i;}});
     if(nearest!==index){index=nearest;slides.forEach((el,i)=>el.classList.toggle("is-active",i===index));if(counter)counter.textContent=String(index+1).padStart(2,"0")+" / "+String(items.length).padStart(2,"0");if(caption)caption.textContent=items[index]?.name||"";}
   },{passive:true});
-  if(SUPABASE_URL.startsWith("YOUR_")||SUPABASE_ANON_KEY.startsWith("YOUR_")||!window.supabase){
-    say("Setup required: add your Supabase Project URL and publishable/anon key in this script.");
-    return;
-  }
+
+  if(SUPABASE_URL.startsWith("YOUR_")||SUPABASE_ANON_KEY.startsWith("YOUR_")||!window.supabase){say("Gallery setup required.");return;}
   client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+
+  // Show the last known gallery immediately, then refresh in the background.
+  const cached=loadCache();
+  if(cached) applyItems(cached,true);
+  else say("Loading gallery…");
+  refresh();
+
   $("sgLoginBtn").onclick=async()=>{
     const {error}=await client.auth.signInWithPassword({email:$("sgEmail").value.trim(),password:$("sgPassword").value});
     if(error){say("Login failed: "+error.message);return;}
@@ -1062,18 +1091,16 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
   $("sgLogoutBtn").onclick=async()=>{await client.auth.signOut();$("sgLogin").classList.remove("sg-hidden");$("sgUploadPanel").classList.add("sg-hidden");say("Logged out.");};
   $("sgUploadBtn").onclick=async()=>{
     const files=[...$("sgFiles").files];if(!files.length){say("Please choose one or more image files.");return;}
-    say("Uploading "+files.length+" image(s)...");
+    say("Uploading "+files.length+" image(s)…");
     for(let i=0;i<files.length;i++){
       const file=files[i];if(!/^image\/(jpeg|png|webp|gif|svg\+xml)$/i.test(file.type)){say("Skipped unsupported image: "+file.name);continue;}
-      const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-      const path=Date.now()+"_"+i+"_"+safe;
-      const {error}=await client.storage.from(BUCKET).upload(path,file,{contentType:file.type || "application/octet-stream",upsert:false});
+      const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");const path=Date.now()+"_"+i+"_"+safe;
+      const {error}=await client.storage.from(BUCKET).upload(path,file,{contentType:file.type||"application/octet-stream",upsert:false});
       if(error){say("Upload stopped at "+file.name+": "+error.message);return;}
     }
     $("sgFiles").value="";say("Upload complete.");await refresh();
   };
-  client.auth.getSession().then(({data})=>{if(data.session){$("sgLogin").classList.add("sg-hidden");$("sgUploadPanel").classList.remove("sg-hidden");}refresh();});
-  restartAuto();
+  client.auth.getSession().then(({data})=>{if(data.session){$("sgLogin").classList.add("sg-hidden");$("sgUploadPanel").classList.remove("sg-hidden");}});
 })();
 </script>
 
