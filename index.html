@@ -796,8 +796,8 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
       <h2 id="modalTitle">Project Title</h2>
       <p id="modalDescription">Project details and background will appear here.</p>
       <div class="modal-details">
-        <div class="detail"><span>Label</span><strong id="modalLabel">Client Name</strong></div>
-        <div class="detail"><span>CONTRIBUTION</span><strong id="modalCONTRIBUTION">Designer / Editor</strong></div>
+        <div class="detail"><span id="modalLabel">PROJECT TYPE</span><strong id="modalValue">Project Information</strong></div>
+        <div class="detail"><span id="modalContributionLabel">MY CONTRIBUTION</span><strong id="modalContribution">Design &amp; Visual Creation</strong></div>
       </div>
     </div>
   </div>
@@ -888,49 +888,63 @@ document.querySelectorAll(".tilt-card:not(.fp-card)").forEach(card=>{
 });
 
 /* ===== PROJECT DATA ===== */
-const projectsData={
-  project1:{
-    title:"Read Mood",category:"Graphic Design",image:"project1.jpg",
-    description:"A comprehensive brand and editorial design concept focused on enhancing reading experiences through visual aesthetic balance.",
-    Platform:"Social Media / Print / Digital.",Tools:"Photoshop, Illustrator"
+const projectsData = {
+  project1: {
+    title: "Read Mood", category: "Graphic Design", image: "project1.jpg",
+    description: "A comprehensive brand and editorial design concept focused on enhancing reading experiences through visual aesthetic balance.",
+    label: "PLATFORM", value: "Social Media / Print / Digital",
+    contributionLabel: "TOOLS USED", contribution: "Photoshop, Illustrator"
   },
-  project2:{
-    title:"Visual Stories",category:"Motion & Video Editing",image:"project2.jpg",
-    description:"Dynamic video editing project utilizing modern motion graphics, seamless transitions, and color grading for digital engagement.",
-    Platform:"Social Media / YouTube",Tools:"Adobe Premier Pro / After Effects"
+  project2: {
+    title: "Visual Stories", category: "Motion & Video Editing", image: "project2.jpg",
+    description: "Dynamic video editing project utilizing modern motion graphics, seamless transitions, and color grading for digital engagement.",
+    label: "PLATFORM", value: "Social Media / YouTube",
+    contributionLabel: "TOOLS USED", contribution: "Adobe Premiere Pro / After Effects"
   },
-  project3:{
-    title:"Brand Identity",category:"Branding",image:"project3.jpg",
-    description:"Complete corporate branding package including logo design, color typography guidelines, and social media assets.",
-    Label:"Content",CONTRIBUTION:"Brand Strategy & Visual Design"
+  project3: {
+    title: "Brand Identity", category: "Branding", image: "project3.jpg",
+    description: "Complete corporate branding package including logo design, color typography guidelines, and social media assets.",
+    label: "PROJECT TYPE", value: "Brand Identity Design",
+    contributionLabel: "MY CONTRIBUTION", contribution: "Brand Strategy & Visual Design"
   },
-  project4:{
-    title:"Digital Campaign",category:"Creative Content",image:"project4.jpg",
-    description:"Multi-platform social media ad campaign focused on brand awareness and conversion optimization.",
-    CAMPAIGN:"Digital Marketing Campaign",CONTRIBUTION:"Graphic Design & Visual Content"
+  project4: {
+    title: "Digital Campaign", category: "Creative Content", image: "project4.jpg",
+    description: "Multi-platform social media ad campaign focused on brand awareness and conversion optimization.",
+    label: "CAMPAIGN TYPE", value: "Digital Marketing Campaign",
+    contributionLabel: "MY CONTRIBUTION", contribution: "Graphic Design & Visual Content"
   },
-  project5:{
-    title:"AI Smart Rehearse",category:"AI Tool",image:"project5.jpg",
-    description:"Interface design and visual asset creation for an AI-driven public speaking rehearsal application.",
-    PROJECT:"AI-Powered Rehearsal Tool",CONTRIBUTION:"UI Design & Visual Assets"
+  project5: {
+    title: "AI Smart Rehearse", category: "AI Tool", image: "project5.jpg",
+    description: "Interface design and visual asset creation for an AI-driven public speaking rehearsal application.",
+    label: "PROJECT TYPE", value: "AI-Powered Rehearsal Tool",
+    contributionLabel: "MY CONTRIBUTION", contribution: "UI Design & Visual Assets"
   },
-  project6:{
-    title:"Social Media Branding",category:"Design",image:"project6.jpg",
-    description:"Creative visual editing and video design crafted for modern digital platforms.",
-    BRANDING:"Social Media Visual Identity",CONTRIBUTION:"Post Design, Cover Design & Brand Assets"
+  project6: {
+    title: "Social Media Branding", category: "Design", image: "project6.jpg",
+    description: "Creative visual editing and video design crafted for modern digital platforms.",
+    label: "BRANDING SCOPE", value: "Social Media Visual Identity",
+    contributionLabel: "MY CONTRIBUTION", contribution: "Post Design, Cover Design & Brand Assets"
   }
 };
 
-function openProject(id){
-  const p=projectsData[id];if(!p)return;
-  document.getElementById("modalImage").src=p.image;
-  document.getElementById("modalCategory").textContent=p.category;
-  document.getElementById("modalTitle").textContent=p.title;
-  document.getElementById("modalDescription").textContent=p.description;
-  document.getElementById("modalClient").textContent=p.client;
-  document.getElementById("modalRole").textContent=p.role;
+function openProject(id) {
+  const p = projectsData[id];
+  if (!p) {
+    console.error("Project data not found:", id);
+    return;
+  }
+
+  document.getElementById("modalImage").src = p.image;
+  document.getElementById("modalCategory").textContent = p.category;
+  document.getElementById("modalTitle").textContent = p.title;
+  document.getElementById("modalDescription").textContent = p.description;
+  document.getElementById("modalLabel").textContent = p.label;
+  document.getElementById("modalValue").textContent = p.value;
+  document.getElementById("modalContributionLabel").textContent = p.contributionLabel;
+  document.getElementById("modalContribution").textContent = p.contribution;
+
   document.getElementById("projectModal").classList.add("active");
-  document.body.style.overflow="hidden";
+  document.body.style.overflow = "hidden";
 }
 function closeProject(){
   document.getElementById("projectModal").classList.remove("active");
