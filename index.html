@@ -1178,7 +1178,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
         .map(f=>({name:f.name,url:optimizedUrl(f.name),fallback:client.storage.from(BUCKET).getPublicUrl(f.name).data.publicUrl}));
       saveCache(list);
       applyItems(list,false);
-      say("Gallery ready.");
+      say("Admin- Farhan Tanvir.");
     }catch(e){if(!items.length)say("Gallery is temporarily unavailable.");}
   }
 
